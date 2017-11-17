@@ -11,10 +11,6 @@ using Microsoft.Owin.Security;
 using PPC_Rental.Models;
 
 namespace PPC_Rental.Controllers
-    //jhfjkdhfjk
-    //dddddddd
-    //djkdjdjdjf
-    //ghgsdhghsgdhs
 {
     [Authorize]
     public class AccountController : Controller
