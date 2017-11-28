@@ -71,6 +71,7 @@ namespace PPC_Rental.Models
         {
             return db.PROPERTies.OrderByDescending(x => x.PropertyName).ToPagedList(page, pageSize);
         }
+       
 
         public USER GetID(string userName)
         {

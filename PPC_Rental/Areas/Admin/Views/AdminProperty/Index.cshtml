@@ -5,15 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-@if (Session["UserID"] == null)
-{
-    @Html.Partial("_LoginPartial")
-}
-else
-{
-    @Session["UserId"]
-}
+<h2>Admin Area</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
