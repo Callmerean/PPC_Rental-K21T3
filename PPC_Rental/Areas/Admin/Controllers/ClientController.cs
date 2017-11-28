@@ -12,7 +12,21 @@ namespace PPC_Rental.Areas.Admin.Controllers
         // GET: Admin/Client
         DemoPPCRentalEntities1 db = new DemoPPCRentalEntities1();
 
-       
+        public ActionResult Index()
+        {
+            if (Session["UserID"] != null)
+            {
+                int x1 = (int)Session["UserID"];
+                var property = db.PROPERTies.ToList().Where(x => x.UserID == x1);
+
+
+                return View(property);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
         [HttpGet]
         public ActionResult Login()
         {
