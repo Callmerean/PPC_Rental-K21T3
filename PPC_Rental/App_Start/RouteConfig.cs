@@ -18,6 +18,13 @@ namespace PPC_Rental
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+           
+    //        routes.MapRoute(
+    //    name: "Login",
+    //    url: "dang-nhap",
+    //    defaults: new { controller = "AdminProperty", action = "Index", id = UrlParameter.Optional },
+    //    namespaces: new[] { "PPC_Rental.Controllers" }
+    //);
         }
     }
 }

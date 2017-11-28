@@ -10,7 +10,7 @@ namespace PPC_Rental.Controllers
 
     public class DetailsController : Controller
     {
-        DemoPPCRentalEntities db = new DemoPPCRentalEntities();
+        DemoPPCRentalEntities1 db = new DemoPPCRentalEntities1();
         public ActionResult Details(int id)
         {
             var property = db.PROPERTies.FirstOrDefault(x => x.ID == id);

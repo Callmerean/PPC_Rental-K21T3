@@ -1,0 +1,148 @@
+﻿@model PagedList.IPagedList<PPC_Rental.Models.PROPERTY>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+@if (Session["UserID"] == null)
+{
+    @Html.Partial("_LoginPartial")
+}
+else
+{
+    @Session["UserId"]
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="simple-table" class="table  table-bordered table-hover">
+                <thead>
+            
+                
+                <th>PropertyName</th>
+                <th>Avatar</th>
+                <th>PropertyType</th>
+                <th>Price</th>
+                <th>UnitPrice</th>
+                <th>Area</th>
+                <th>District</th>
+                <th>Status</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th></th>
+               
+                    
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PropertyName)
+                            </td>
+                            @*<td>
+                                <img src="/Images/@item.Images" width="100px" alt="Alternate Text" />
+                           </td>*@
+                            <td>
+                                @{
+
+                                    try
+                                    {
+                                        @*if (item.Images == null)
+                    {
+                        <td><img src="~/Images/ImagesNull.png" width="100px"></td>
+                    }
+                    else
+                    {*@
+                                    <img src="@Url.Content(item.Avatar)" width="100px">
+                                        //}
+                                        //}
+                                        //else
+                                        //{
+                                        // <td><img src="/Images/@item.Images" width="100px"></td>
+                                        //}
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+
+                                    }
+                                }
+                            </td>
+                  
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PROPERTY_TYPE.CodeType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UnitPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area)
+                            </td>
+                          
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DISTRICT.DistrictName)
+                            </td>
+                            
+                            <td class="hidden-480">
+                                <span class="label label-sm label-warning">@Html.DisplayFor(modelItem => item.PROJECT_STATUS.Status_Name)</span>
+                           
+                            </td>
+                            
+                          
+                            <td>
+                                @Html.DisplayFor(modelItem => item.USER.Email)
+                            </td>
+                           
+                            <th>
+                                @Html.DisplayFor(modelItem => item.Created_at)
+                            </th>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.Updated_at)
+                            </th>
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <button class="btn btn-xs btn-success">
+                                        <i class="ace-icon fa fa-check bigger-120"></i>
+                                    </button>
+
+                                    <button class="btn btn-xs btn-info">
+                                        <a href="~/Admin/AdminProperty/Edit/@item.ID"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
+</button>
+
+                                    <button class="btn btn-xs btn-danger">
+                                        <a href="~/Admin/AdminProperty/Delete/@item.ID"> <i class="ace-icon fa fa-trash-o bigger-120"></i></a>
+</button>
+
+                                    @*<button class="btn btn-xs btn-warning">
+                                        <i class="ace-icon fa fa-flag bigger-120"></i>
+                                    </button>*@
+                                </div>  
+                           
+                            </td>
+                        </tr>
+                    }
+                    
+
+                    
+                  
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div><!-- /.span -->
+    </div><!-- /.row -->
+
+
+    <!-- PAGE CONTENT ENDS -->
