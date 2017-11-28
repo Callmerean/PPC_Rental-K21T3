@@ -48,7 +48,161 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 text = s.StreetName
             }), JsonRequestBehavior.AllowGet);
         }
-      
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var property = new DAO().ViewDetail(id);
+            ListItem();
+
+
+            return View(property);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(PROPERTY property, List<HttpPostedFileBase> files)
+        {
+
+            ListItem();
+            // Images
+            try
+            {
+
+                string filename = Path.GetFileNameWithoutExtension(property.ImageFile.FileName);
+                string extension = Path.GetExtension(property.ImageFile.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                property.Avatar = "~/Images/" + filename;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                // Avatar
+
+                if (Path.GetFileNameWithoutExtension(property.ImageFile.FileName) == null)
+                {
+                    string s2 = "~/Images/ImagesNull.png";
+                    property.ImageFile.SaveAs(s2);
+                    //property.ImageFile2.SaveAs(filename2);
+                }
+                else
+                {
+                    //property.ImageFile2.SaveAs(filename2);
+                    property.ImageFile.SaveAs(filename);
+                }
+
+
+
+                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var model = new DAO();
+                    var res = model.Update(property);
+                    if (res)
+                    {
+                        return RedirectToAction("Index", "AdminProperty");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Update không thành công");
+                    }
+                }
+
+            }
+            catch
+            {
+                if (ModelState.IsValid)
+                {
+
+                    var model = new DAO();
+                    var res = model.Update(property);
+                    if (res)
+                    {
+                        return RedirectToAction("Index", "AdminProperty");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Update không thành công");
+                    }
+                }
+            }
+
+            ///Multiple Images
+
+            //try
+            //{
+            //var path = "";
+            //foreach (var item in files)
+            //{
+            //    if (item != null)
+            //    {
+            //        if (item.ContentLength > 0)
+            //        {
+            //            if (Path.GetExtension(item.FileName).ToLower() == ".jpg"
+            //                || Path.GetExtension(item.FileName).ToLower() == ".png"
+            //                || Path.GetExtension(item.FileName).ToLower() == ".gif"
+            //                || Path.GetExtension(item.FileName).ToLower() == ".jpeg"
+            //                )
+            //            {
+            //                path = Path.Combine(Server.MapPath("~/MultipleImage"), item.FileName);
+            //                item.SaveAs(path);
+            //                ViewBag.UploadSuccess = true;
+            //            }
+            //        }
+
+            //    }
+            //}
+            //    if (ModelState.IsValid)
+            //    {
+            //        var model = new DAO();
+            //        var res = model.Update(property);
+            //        if (res)
+            //        {
+            //            return RedirectToAction("Index", "AdminProperty");
+            //        }
+            //        else
+            //        {
+            //            ModelState.AddModelError("", "Update không thành công");
+            //        }
+            //    }
+            //}
+            //catch {
+            //    if (ModelState.IsValid)
+            //    {
+
+            //        var model = new DAO();
+            //        var res = model.Update(property);
+            //        if (res)
+            //        {
+            //            return RedirectToAction("Index", "AdminProperty");
+            //        }
+            //        else
+            //        {
+            //            ModelState.AddModelError("", "Update không thành công");
+            //        }
+            //   }
+
+
+
+            //}
+
+            //if (ModelState.IsValid)
+            //{   //iterating through multiple file collection   
+            //    foreach (HttpPostedFileBase file in files)
+            //    {
+            //        //Checking file is available to save.  
+            //        if (file != null)
+            //        {
+            //            var InputFileName = Path.GetFileName(file.FileName);
+            //            var ServerSavePath = Path.Combine(Server.MapPath("~/MultipleImages/") + InputFileName);
+            //            //Save file to server folder  
+            //            file.SaveAs(ServerSavePath);
+            //            //assigning file uploaded status to ViewBag for showing message to user.  
+            //            ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+            //        }
+
+            //    }
+            //}
+            return View();
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
+
+        }
         public ActionResult Create()
         {
             ListItem();
