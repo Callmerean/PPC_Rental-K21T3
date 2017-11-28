@@ -61,7 +61,32 @@ namespace PPC_Rental.Controllers
 
             return View();
         }
-       
+        [HttpGet]
+        public ActionResult Search(int dis, string text, string propertytype, int bed, int bath, int street)
+        {
+            myDis = new List<SelectListItem>();
+            myType = new List<SelectListItem>();
+            var distr = model.DISTRICTs.ToList();
+            var type = model.PROPERTY_TYPE.ToList();
+            foreach (var dt in distr)
+            {
+                myDis.Add(new SelectListItem { Text = dt.DistrictName, Value = dt.DistrictName });
             }
+            foreach (var tp in type)
+            {
+                myType.Add(new SelectListItem { Text = tp.CodeType, Value = tp.CodeType });
+            }
+            ViewBag.myDistrict = myDis;
+            ViewBag.myPropertyType = myType;
+            var property = model.PROPERTies.ToList().Where(x => (x.DISTRICT.ID == dis || x.STREET.ID == street || x.BathRoom == bath || x.BedRoom == bed || x.PROPERTY_TYPE.CodeType == propertytype));
+
+            return View(property);
+
+
+
+
+        }
+
+    }
      
 }
