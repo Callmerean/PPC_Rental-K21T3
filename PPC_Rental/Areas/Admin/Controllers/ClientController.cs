@@ -14,7 +14,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
     {
         // GET: Admin/Client
         DemoPPCRentalEntities1 db = new DemoPPCRentalEntities1();
-
+        public static string idd = "";
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
             if (Session["UserID"] != null)
@@ -44,7 +44,9 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 if (user.Password.Equals(password))
                 {
                     Session["FullName"] = user.FullName;
-                    Session["UserId"] = user.ID;
+
+                    Session["UserID"] = user.ID;
+                    idd = Session["UserID"].ToString();
                     return RedirectToAction("Index");
                 }
             }
@@ -74,7 +76,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files)
         {
-
+            ListItem();
             try
             {
 
@@ -98,7 +100,8 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 }
 
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-
+                pROPERTY.UserID = int.Parse(idd);
+                pROPERTY.Status_ID = 1;
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
@@ -117,6 +120,9 @@ namespace PPC_Rental.Areas.Admin.Controllers
             }
             catch
             {
+                pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                pROPERTY.UserID = int.Parse(idd);
+                pROPERTY.Status_ID = 1;
                 if (ModelState.IsValid)
                 {
 
@@ -124,7 +130,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                     var res = model.InsertProperty(pROPERTY);
                     if (res > 0)
                     {
-                        return RedirectToAction("Index", "AdminProperty");
+                        return RedirectToAction("Index", "Client");
                     }
                     else
                     {
@@ -134,14 +140,8 @@ namespace PPC_Rental.Areas.Admin.Controllers
             }
 
 
-            ViewBag.District_ID = new SelectList(db.DISTRICTs, "ID", "DistrictName", pROPERTY.District_ID);
-            ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name", pROPERTY.Status_ID);
-            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType", pROPERTY.PropertyType_ID);
-            ViewBag.Street_ID = new SelectList(db.STREETs, "ID", "StreetName", pROPERTY.Street_ID);
-            ViewBag.UserID = new SelectList(db.USERs, "ID", "Email", pROPERTY.UserID);
-            ViewBag.Sale_ID = new SelectList(db.USERs, "ID", "Email", pROPERTY.Sale_ID);
-            ViewBag.Ward_ID = new SelectList(db.WARDs, "ID", "WardName", pROPERTY.Ward_ID);
-            return View(pROPERTY);
+
+            return View();
         }
         //[HttpPost]
         //public ActionResult Create(PROPERTY property, List<HttpPostedFileBase> files)
@@ -235,21 +235,21 @@ namespace PPC_Rental.Areas.Admin.Controllers
 
         //    return View();
         //}
-        [HttpGet]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.PROPERTies.FirstOrDefault(x => x.ID == id);
-            if (product == null)
+            PROPERTY pROPERTY = db.PROPERTies.Find(id);
+            if (pROPERTY == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(pROPERTY);
         }
+
+        // POST: Admin/xx/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

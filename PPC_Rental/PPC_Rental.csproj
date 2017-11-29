@@ -171,6 +171,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminPropertyController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClientController.cs" />
+    <Compile Include="Areas\Admin\Controllers\xxController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -578,7 +579,6 @@
     <Content Include="Content\Admin\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\AdminProperty\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminProperty\Create.cshtml" />
     <Content Include="Areas\Admin\Views\AdminProperty\Delete.cshtml" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.ttf" />
@@ -597,6 +597,7 @@
     <Content Include="Areas\Admin\Views\AdminProperty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Client\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Client\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProperty\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

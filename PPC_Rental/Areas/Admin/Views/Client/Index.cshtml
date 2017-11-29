@@ -5,14 +5,7 @@
 }
 
 <h2>Agency Area</h2>
-@if (Session["UserID"] == null)
-{
-    @Html.Partial("_LoginPartial")
-}
-else
-{
-    @Session["UserId"]
-}
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -33,9 +26,9 @@ else
                 <th>Area</th>
                 <th>District</th>
                 <th>Status</th>
-                <th>Email</th>
+                
                 <th>Created</th>
-                <th>Updated</th>
+               
                 <th></th>
 
 
@@ -101,16 +94,12 @@ else
                             </td>
 
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.USER.Email)
-                            </td>
+                            
 
                             <th>
                                 @Html.DisplayFor(modelItem => item.Created_at)
                             </th>
-                            <th>
-                                @Html.DisplayFor(modelItem => item.Updated_at)
-                            </th>
+                           
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <button class="btn btn-xs btn-success">

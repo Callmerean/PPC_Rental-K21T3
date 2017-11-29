@@ -17,24 +17,12 @@ namespace PPC_Rental.Areas.Admin.Controllers
         // GET: /Admin/AdminProperty/
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
-            int x = (int)Session["UserId"];
 
-            //var properties = db.PROPERTies.OrderByDescending(x => x.ID).ToList();
-            //return View(properties);
-            //var propertymodel = new DAO();
-            //var model = propertymodel.ListAllPaging(page, pageSize);
-            //return View(model);
-            if (Session["UserID"] != null)
-            {
-                var propertymodel = new DAO();
             
-                var model = propertymodel.ListAllPaging(page, pageSize);
-                return View(model);
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+            var propertymodel = new DAO();
+            var model = propertymodel.ListAllPaging(page, pageSize);
+            return View(model);
+
 
         }
 
@@ -210,74 +198,69 @@ namespace PPC_Rental.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files) { 
-           
-                try
+        public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files)
+        {
+            ListItem();
+            try
+            {
+
+                string filename = Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName);
+                string extension = Path.GetExtension(pROPERTY.ImageFile.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                pROPERTY.Avatar = "~/Images/" + filename;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                // Avatar
+
+                if (Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName) == null)
                 {
-
-                    string filename = Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName);
-                    string extension = Path.GetExtension(pROPERTY.ImageFile.FileName);
-                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                    pROPERTY.Avatar = "~/Images/" + filename;
-                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                    // Avatar
-
-                    if (Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName) == null)
-                    {
-                        string s2 = "~/Images/ImagesNull.png";
-                        pROPERTY.ImageFile.SaveAs(s2);
-                        //property.ImageFile2.SaveAs(filename2);
-                    }
-                    else
-                    {
-                        //property.ImageFile2.SaveAs(filename2);
-                        pROPERTY.ImageFile.SaveAs(filename);
-                    }
+                    string s2 = "~/Images/ImagesNull.png";
+                    pROPERTY.ImageFile.SaveAs(s2);
+                    //property.ImageFile2.SaveAs(filename2);
+                }
+                else
+                {
+                    //property.ImageFile2.SaveAs(filename2);
+                    pROPERTY.ImageFile.SaveAs(filename);
+                }
 
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
 
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
-                    {
-                        var model = new DAO();
-                        var res = model.InsertProperty(pROPERTY);
-                        if (res > 0)
-                        {
-                            return RedirectToAction("Index", "AdminProperty");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Update không thành công");
-                        }
-                    }
-
-                }
-                catch
                 {
-                    if (ModelState.IsValid)
+                    var model = new DAO();
+                    var res = model.InsertProperty(pROPERTY);
+                    if (res > 0)
                     {
-
-                        var model = new DAO();
-                        var res = model.InsertProperty(pROPERTY);
-                        if (res > 0)
-                        {
-                            return RedirectToAction("Index", "AdminProperty");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Update không thành công");
-                        }
+                        return RedirectToAction("Index", "AdminProperty");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Update không thành công");
                     }
                 }
-            
 
-            ViewBag.District_ID = new SelectList(db.DISTRICTs, "ID", "DistrictName", pROPERTY.District_ID);
-            ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name", pROPERTY.Status_ID);
-            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType", pROPERTY.PropertyType_ID);
-            ViewBag.Street_ID = new SelectList(db.STREETs, "ID", "StreetName", pROPERTY.Street_ID);
-            ViewBag.UserID = new SelectList(db.USERs, "ID", "Email", pROPERTY.UserID);
-            ViewBag.Sale_ID = new SelectList(db.USERs, "ID", "Email", pROPERTY.Sale_ID);
-            ViewBag.Ward_ID = new SelectList(db.WARDs, "ID", "WardName", pROPERTY.Ward_ID);
+            }
+            catch
+            {
+                if (ModelState.IsValid)
+                {
+
+                    var model = new DAO();
+                    var res = model.InsertProperty(pROPERTY);
+                    if (res > 0)
+                    {
+                        return RedirectToAction("Index", "AdminProperty");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Update không thành công");
+                    }
+                }
+            }
+
+
+            
             return View(pROPERTY);
         }
         //[HttpPost]
@@ -375,7 +358,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-           
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
