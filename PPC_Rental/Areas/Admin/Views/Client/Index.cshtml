@@ -55,7 +55,7 @@
                                             }
                                             else
                                             {*@
-                                        <img src="@Url.Content(item.Avatar)" width="100px">
+                                        <img src="~/Images/@item.Avatar" width="150px">
                                         //}
                                         //}
                                         //else
@@ -107,11 +107,11 @@
                                     </button>
 
                                     <button class="btn btn-xs btn-info">
-                                        <a href="~/Admin/AdminProperty/Edit/@item.ID"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
+                                        <a href="~/Admin/Client/Edit/@item.ID"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
                                     </button>
 
                                     <button class="btn btn-xs btn-danger">
-                                        <a href="~/Admin/AdminProperty/Delete/@item.ID"> <i class="ace-icon fa fa-trash-o bigger-120"></i></a>
+                                        <a href="~/Admin/Client/Delete/@item.ID"> <i class="ace-icon fa fa-trash-o bigger-120"></i></a>
                                     </button>
 
                                     @*<button class="btn btn-xs btn-warning">
@@ -131,4 +131,5 @@
             @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
         </div><!-- /.span -->
     </div><!-- /.row -->
+    </div>
     <!-- PAGE CONTENT ENDS -->

@@ -1,299 +1,262 @@
-﻿@using PPC_Rental.Models
-@model IEnumerable<PPC_Rental.Models.PROPERTY>
-@{
-    ViewBag.Title = "Home";
-    var db = new DemoPPCRentalEntities1();
-   
+﻿@{
+    ViewBag.Title = "Home Page";
+    DemoPPCRentalEntities1 db = new DemoPPCRentalEntities1();
+    var Quans = new SelectList(db.DISTRICTs, "ID", "DistrictName");
+    var Protyp = new SelectList(db.PROPERTY_TYPE, "ID","CodeType");
 }
-
-<div class="slider-area">
-    <div class="slider">
-        <div id="bg-slider" class="owl-carousel owl-theme">
-            <div class="item"><img src="/Content/assets/img/slide1/slider-image-2.jpg" alt="The Last of us"></div>
-            <div class="item"><img src="/Content/assets/img/slide1/slider-image-1.jpg" alt="GTA V"></div>
-            <div class="item">
-                <img src="~/Content/assets/img/slide1/slider-image-3.jpg" />
-            </div>
-            <div class="item">
-                <img src="~/Content/assets/img/slide1/slider-image-4.jpg" />
-            </div>
-        </div>
-    </div>
-    <div class="container slider-content">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                <h2>property Searching Just Got So Easy</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="home-lager-shearch" style="padding-top: 25px; margin-top: -125px; padding-bottom: 60px; background-color: rgb(252, 252, 252);">
-    <div class="container">
-        <div class="col-md-12 large-search">
-            <div class="search-form wow swing">
-                <form class=" form-inline" role="search" action="@Url.Action("Search","Home")" method="get">
-                    <div class="col-md-12">
-                       
-                        <div class="col-md-4">
-                            <label for="property-geo">Property Type</label>
-                            @Html.DropDownList("propertytype", (IEnumerable<SelectListItem>)ViewBag.myPropertyType,  "Property Type" ,new { @class = "selectpicker show-tick form-control" })
-                       
-                        </div>
-                       <div class="col-md-4">
-                           <label for="property-geo">District</label>
-                           @Html.DropDownList("dis", (IEnumerable<SelectListItem>)ViewBag.myDistrict, "Select Your City", new { @class = "selectpicker show-tick form-control" })
-                        </div>
-                        <div class="col-md-4">
-                            <label for="property-geo">Area</label>
-                            <select id="lunchBegins" class="selectpicker" name="area">
-
-
-                                <option value="1">120m2</option>
-                                <option value="2">130m2</option>
-                                <option value="3">150m2</option>
-                                <option value="4">200m2</option>
-                                <option value="5">500m2</option>
-
-                            </select>
-
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="margin-top: 10px">
-                        <div class="col-md-4">
-                            <label for="property-geo">Min. Baths</label>
-                            <select id="lunchBegins" class="selectpicker"   name="bath">
-                               
-
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                             
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="property-geo">Min. Beds</label>
-                            <select id="basic" class="selectpicker show-tick form-control" name="bed">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="property-geo">Key Word</label>
-                            <input type="text" class="form-control" placeholder="Search" name="keyWord">
-                        </div>
-                        </div>
-                    @*<div class="col-md-12 clear">
-                        <div class="search-row">
-
-                            <div class="col-sm-3">
-                                <label for="price-range">Price range ($):</label>
-                                <input type="text" class="span2" value="" data-slider-min="0"
-                                       data-slider-max="600" data-slider-step="5"
-                                       data-slider-value="[0,450]" id="price-range"><br />
-                                <b class="pull-left color">2000$</b>
-                                <b class="pull-right color">100000$</b>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <label for="property-geo">Property geo (m2) :</label>
-                                <input type="text" class="span2" value="" data-slider-min="0"
-                                       data-slider-max="600" data-slider-step="5"
-                                       data-slider-value="[50,450]" id="property-geo"><br />
-                                <b class="pull-left color">40m</b>
-                                <b class="pull-right color">12000m</b>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <label for="price-range">Min baths :</label>
-                                <input type="text" class="span2" value="" data-slider-min="0"
-                                       data-slider-max="600" data-slider-step="5"
-                                       data-slider-value="[250,450]" id="min-baths"><br />
-                                <b class="pull-left color">1</b>
-                                <b class="pull-right color">120</b>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <label for="property-geo">Min bed :</label>
-                                <input type="text" class="span2" value="" data-slider-min="0"
-                                       data-slider-max="600" data-slider-step="5"
-                                       data-slider-value="[250,450]" id="min-bed"><br />
-                                <b class="pull-left color">1</b>
-                                <b class="pull-right color">120</b>
-                            </div>
-                            <!-- End of  -->
-
-                        </div>
-
-                        <div class="search-row">
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Fire Place(3100)
-                                    </label>
+@model IEnumerable<PPC_Rental.Models.PROPERTY>
+    @using PPC_Rental.Models
+<!-- SLIDER -->
+<div class="flexslider" id="slider">
+    <ul class="slides">
+        @foreach (var item in Model)
+        {
+            if (item.ID <= 10)
+            {
+            <li>
+                <img src="/Content/Hata/images/@item.Images" class="img-responsive" alt="Slider Image" />
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="detail">
+                                <div class="white">
+                                    <h2>@item.PropertyName.Substring(0, item.PropertyName.Length - 10)</h2>
+                                    <span class="slide-location">@item.WARD.WardName, @item.DISTRICT.DistrictName</span>
+                                    <div class="bar"></div>
+                                    <span class="slide-price">$ @item.Price</span>
                                 </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Dual Sinks(500)
-                                    </label>
+                                <div class="red">
+                                    <span class="bath">@item.BathRoom Bathrooms</span>
+                                    <span class="bed">@item.BedRoom Bedrooms</span>
+                                    <span class="gym">@item.PackingPlace Garage</span>
+                                    
                                 </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Hurricane Shutters(99)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Swimming Pool(1190)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 2 Stories(4600)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Emergency Exit(200)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Laundry Room(10073)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Jog Path(1503)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 26' Ceilings(1200)
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End of  -->
-                        </div>
-                    </div>*@
-                    <div class="center">
-                        <input type="submit" value="" class="btn btn-default btn-lg-sheach">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- property area -->
-
-    <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12  padding-top-40 properties-page">
-                    <div class="col-md-12 ">
-                        <div class="col-xs-10 page-subheader sorting pl0">
-
-
-
-
-                        </div>
-
-                        <div class="col-xs-2 layout-switcher">
-                            <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                            <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                        </div><!--/ .layout-switcher-->
-                    </div>
-                    <div class="col-md-12 ">
-                        <div id="list-type" class="proerty-th">
-                            @foreach (var ds in Model)
-                            {
-                                <div class="col-sm-6 col-md-3 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="property-1.html"><img src="~/Images/@ds.Images"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> @ds.PropertyName </a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b> @ds.Area</span>
-                                            <span class="proerty-price pull-right"> @ds.Price @ds.UnitPrice</span>
-                                            <p style="display: none;">@ds.Content.Substring(0, 10)</p>
-                                            <div class="property-icon">
-                                                <img src="/Content/assets/img/icon/bid.png"> (@ds.BathRoom)|
-                                                <img src="/Content/assets/img/icon/bath.png"> (@ds.BathRoom)|
-                                                <img src="/Content/assets/img/icon/garage.png">(@ds.PackingPlace)
-                                                <p><a href="/Details/Details/@ds.ID" tabindex="0" style="font-size: small; color: #56c6ee;">Full info </a></p>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-12">
-                        <div class="pull-right">
-                            <div class="pagination">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+            </li>
+            }
+
+        }
+    </ul>
+</div>
+<!-- SLIDER -->
+<!-- FILTER -->
+<form role="search" action="@Url.Action("Search","Home")" method="get">
+    <div class="container">
+        <div class="filter">
+
+            @Html.DropDownList("dis", Quans, "Location", new { @class= "location", @id = "dis" })
+           @Html.DropDownList("propertytype", Protyp, "Type", new { @class= "cata",@id = "type" })
+            <select class="type" name="bed">
+                <option>Bedroom</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <select class="type" name="bath">
+                <option>Bathroom</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+          
+
+            <button type="submit" class="btn"><i class="fa fa-search"></i>Search</button>
+
+            <div class="range">
+                <input type="text" name="name" placeholder="Key Word" class="add" />
+                <input type="text" name="name" placeholder="Min. Price"  class="add1" />
+                <input type="text" name="name" placeholder="Max. Price" class="add1" />
+                
+            </div>
+
+        </div>
+    </div>
+    </form> 
+    <!-- FILTER -->
+    <!-- ITEMS GRID -->
+    <div class="container">
+        <div class="row">
+            @foreach (var ds in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="item">
+                        <div class="item-header clearfix">
+                            @if (ds.PropertyName.Length > 30)
+                            {
+                                <h3><a href="#">@ds.PropertyName.Substring(0, ds.PropertyName.Length - 10)</a></h3>
+                            }
+                            else
+                            {
+                                <h3><a href="#">@ds.PropertyName</a></h3>
+                            }
+                            <span class="favorite"><i class="fa fa-heart"></i>9</span>
+                        </div>
+                        <figure>
+                            <img src="~/Images/@ds.Avatar" alt="" class="img-responsive">
+                            <span class="label sale">Sell</span>
+                            <div class="overlay">
+                                <a href="/Details/Details/@ds.ID" class="btn btn-detail">Detail</a>
+                            </div>
+                        </figure>
+                        <div class="item-detail">
+                            <div class="left">
+                                <span class="place"><i class="fa fa-map-marker"></i>@ds.DISTRICT.DistrictName</span>
+                                <span class="bed">@ds.BedRoom</span>
+                                <span class="bath">@ds.BathRoom</span>
+                                <span class="garage">@ds.PackingPlace</span>
+                            </div>
+                            <div class="right">
+                                <span class="area">@ds.Area</span>
+                                <span class="price">$ @ds.Price</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- ITEMS GRID -->
+    <!-- BANNER -->
+    <div class="full-width-white design">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-5">
+                    <article>
+                        <h2>interior Design as gift</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus</p>
+                        <button type="button" class="btn btn-danger">learn more</button>
+                    </article>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <figure>
+                        <img src="/Content/Hata/images/gift-design.png" alt="Image">
+                    </figure>
+                </div>
             </div>
         </div>
     </div>
-   
+    <!-- BANNER -->
+    <!-- BLOG -->
+    <div class="full-width home-posts blog-posts">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="post clearfix">
+                        <figure>
+                            <a href="#"><img src="/Content/Hata/images/post1.png" alt="" class="img-responsive"></a>
+                        </figure>
+                        <article>
+                            <span class="date">8 June 2015</span>
+                            <h3><a href="blog-post.html">It has nice clean design</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis nascetur ridiculus...</p>
+                            <a href="#" class="cmmt">28</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="post clearfix">
+                        <figure>
+                            <a href="#"><img src="/Content/Hata/images/post2.png" alt="" class="img-responsive"></a>
+                        </figure>
+                        <article>
+                            <span class="date">14 September 2015</span>
+                            <h3><a href="blog-post.html">Experienced real estate brokers</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis nascetur ridiculus...</p>
+                            <a href="#" class="cmmt">7</a>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- BLOG -->
+    <!-- BANNER -->
+    <div class="full-width personal-agent">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <figure>
+                        <img src="/Content/Hata/images/agent-pic.png" alt="Pic" class="img-responsive">
+                    </figure>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <article>
+                        <span>Lara Loft</span>
+                        <h2>Your personal agent</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget<br> dolor. Aenean massa.</p>
+                        <button type="button" class="btn btn-danger">Get Agent Help</button>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BANNER -->
+    <!-- REVIEWS -->
+    <div class="full-width rewiews">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <img src="/Content/Hata/images/avatar1.png" alt="Avatar" class="img-responsive">
+                    <h6>Jane Ramos</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient...</p>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <img src="/Content/Hata/images/avatar2.png" alt="Avatar" class="img-responsive">
+                    <h6>Eva Rodriges</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient...</p>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <img src="/Content/Hata/images/avatar3.png" alt="Avatar" class="img-responsive">
+                    <h6>Paul Jones</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- REVIEWS -->
+    <!-- CALL2ACTION -->
+    <div class="full-width call-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4>Want to sell you property? contact us now!</h4>
+                </div>
+                <div class="col-md-3">
+                    <a href="contact.html" class="btn btn-danger">Submit Property</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CALL2ACTION -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 1000000,
+            values: [30000, 500000],
+            slide: function (event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
+
+
+ 

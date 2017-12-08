@@ -29,7 +29,7 @@ img{max-width:100%;}
 /*end reset*/
 body {
     font-family: 'Open Sans', sans-serif;
-	background:url(../images/banner.jpg) no-repeat 0px 0px;
+	background:url(../images/slider-4.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-ms-background-size:cover;
@@ -101,7 +101,7 @@ form {
     border: 0;
     font-size: 15px;
     font-weight: 700;
-    color: #0397ff;
+    color: #f44336;
     outline: 0;
     -webkit-box-shadow:0 6px 12px 0 rgb(37, 37, 37);
     -moz-box-shadow: 0 6px 12px 0 rgb(37, 37, 37);
@@ -116,10 +116,10 @@ form {
     font-weight: 600;
     padding: 13px 40px;
     border-radius: 100px;
-    background-color: #047bd0;
+    background-color:#f44336;
     -webkit-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
     -moz-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
-    box-shadow:0 12px 32px 0 rgba(0, 0, 0, 0.71);
+    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
     outline: none;
     cursor: pointer;
     font-family: 'Open Sans', sans-serif;
@@ -152,12 +152,12 @@ form {
     float: left;
     letter-spacing: 1px;
 }
-.forgot-w3ls a, .forgot-w3ls1 a {
-    color: #67c0ff;
-    outline: none;
-    text-decoration: none;
-    font-weight: 600;
-}
+    .forgot-w3ls a, .forgot-w3ls1 a {
+        color: #f44336;
+        outline: none;
+        text-decoration: none;
+        font-weight: 600;
+    }
 /*--copy-right-starts-here--*/
 .footer p {
     margin: 0 auto;
@@ -169,7 +169,7 @@ form {
     text-transform: none;
 }
 .footer a {
-    color: #67c0ff;
+    color: #f44336;
     transition: 0.3s all;
     -webkit-transition: 0.3s all;
     -moz-transition: 0.3s all;

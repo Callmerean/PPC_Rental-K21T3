@@ -17,7 +17,7 @@ namespace PPC_Rental.Models
         public long Insert(USER entity)
         {
             db.USERs.Add(entity);
-            db.SaveChangesAsync();
+            db.SaveChanges();
             return entity.ID;
         }
         public long InsertProperty(PROPERTY entity)
@@ -104,6 +104,11 @@ namespace PPC_Rental.Models
                 }
             }
 
+        }
+
+        public bool CheckUserName(string email)
+        {
+            return db.USERs.Count(x => x.Email == email) > 0;
         }
     }
 }

@@ -1,0 +1,104 @@
+﻿@model PPC_Rental.Models.RegisterModel
+
+@{
+    Layout = null;
+}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Frequent Sign In Form A Responsive Widget Template :: w3layouts</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Frequent Sign In Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link rel="stylesheet" href="/Content/Sig/css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/Content/Sig/css/style.css" type="text/css" media="all" /> <!-- Style-CSS -->
+    <!-- //css files -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
+    <!-- //web-fonts -->
+</head>
+<body>
+@using (Html.BeginForm("Register", "Client", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="banner-overlay-agileinfo">
+        <!--header-->
+        <div class="header-w3l">
+            <h1>HATA COMPANY</h1>
+        </div>
+        <!--//header-->
+        <!--main-->
+        <div class="main-w3layouts-agileinfo">
+            <!--form-stars-here-->
+            <div class="wthree-form">
+                <h2>Register here</h2>
+                @Html.ValidationSummary(true)
+                @if (ViewBag.Success != null)
+                {
+                   
+                    <div class="alert alert-success">@ViewBag.Success</div>
+                }
+                    <div class="form-sub-w3">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "password", @placeholder = "Your Email" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                        <div class="icon-w3">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="form-sub-w3">
+                        @Html.PasswordFor(model => model.Password, new { @class = "password", @placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                        
+                    </div>
+                    <div class="form-sub-w3">
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "password", @placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                       
+                    </div>
+                    <div class="form-sub-w3">
+                        @Html.TextBoxFor(model => model.FullName, new { @class = "password", @placeholder = "Full Name" })
+                        @Html.ValidationMessageFor(model => model.FullName)
+                       
+                    </div>
+                    <div class="form-sub-w3">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "password", @placeholder = "Phone Number" })
+                        @Html.ValidationMessageFor(model => model.Phone)
+                        
+                    </div>
+                    <div class="form-sub-w3">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "password", @placeholder = "Address" })
+                        @Html.ValidationMessageFor(model => model.Address)
+                        
+                    </div>
+                    <p class="forgot-w3ls">Forgot Password?<a href="#">  Click here</a></p>
+                    <p class="forgot-w3ls1">You are Agency?<a href="~/Admin/Client/Login">  Sign In</a></p>
+                    <div class="clear"></div>
+                    <div class="submit-agileits">
+                        <input type="submit" value="Sign in">
+                    </div>
+              
+
+            </div>
+            <!--//form-ends-here-->
+
+        </div>
+        <!--//main-->
+        <!--footer-->
+        <!--//footer-->
+    </div>
+}
+</body>
+</html>

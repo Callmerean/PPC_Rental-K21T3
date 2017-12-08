@@ -48,6 +48,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -109,9 +112,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <Private>True</Private>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="TechTalk.SpecFlow, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.2.2.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -171,12 +173,15 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminPropertyController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClientController.cs" />
-    <Compile Include="Areas\Admin\Controllers\xxController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PROPERTiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ABOUT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DAO.cs" />
@@ -203,6 +208,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\NEWS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PROJECT_STATUS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -215,7 +223,11 @@
     <Compile Include="Models\PROPERTY_TYPE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\STREET.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER.cs">
@@ -356,184 +368,201 @@
     <Content Include="Content\Admin\assets\js\tree.min.js" />
     <Content Include="Content\Admin\assets\js\wizard.min.js" />
     <Content Include="Content\Admin\assets\swf\flashExport.swf" />
-    <Content Include="Content\assets\css\animate.css" />
-    <Content Include="Content\assets\css\bootstrap-select.min.css" />
-    <Content Include="Content\assets\css\bootstrap-theme.css" />
-    <Content Include="Content\assets\css\font-awesome.min.css" />
-    <Content Include="Content\assets\css\fontello.css" />
-    <Content Include="Content\assets\css\icheck.min_all.css" />
-    <Content Include="Content\assets\css\ion.rangeSlider.css" />
-    <Content Include="Content\assets\css\ion.rangeSlider.skinFlat.css" />
-    <Content Include="Content\assets\css\ion.rangeSlider.skinNice.css" />
-    <Content Include="Content\assets\css\jquery.slitslider.css" />
-    <Content Include="Content\assets\css\lightslider.min.css" />
-    <Content Include="Content\assets\css\normalize.css" />
-    <Content Include="Content\assets\css\owl.carousel.css" />
-    <Content Include="Content\assets\css\owl.theme.css" />
-    <Content Include="Content\assets\css\owl.transitions.css" />
-    <Content Include="Content\assets\css\price-range.css" />
-    <Content Include="Content\assets\css\responsive.css" />
-    <Content Include="Content\assets\css\slider.css" />
-    <Content Include="Content\assets\css\style.css" />
-    <Content Include="Content\assets\css\styleNoJS.css" />
-    <Content Include="Content\assets\css\wizard.css" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont_1.svg" />
-    <Content Include="Content\assets\fonts\fontello\fontello.svg" />
-    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\assets\fonts\icon-7-stroke\css\helper.css" />
-    <Content Include="Content\assets\fonts\icon-7-stroke\css\pe-icon-7-stroke.css" />
-    <Content Include="Content\assets\fonts\icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
-    <Content Include="Content\assets\img\ads.jpg" />
-    <Content Include="Content\assets\img\arrow-left.svg" />
-    <Content Include="Content\assets\img\arrow-right.svg" />
-    <Content Include="Content\assets\img\arrows-small.png" />
-    <Content Include="Content\assets\img\arrows.png" />
-    <Content Include="Content\assets\img\bg-footer.jpg" />
-    <Content Include="Content\assets\img\blog1.jpg" />
-    <Content Include="Content\assets\img\blog2.jpg" />
-    <Content Include="Content\assets\img\chevron-down.png" />
-    <Content Include="Content\assets\img\client-face.jpg" />
-    <Content Include="Content\assets\img\client-face1.png" />
-    <Content Include="Content\assets\img\client-face2.png" />
-    <Content Include="Content\assets\img\controls.png" />
-    <Content Include="Content\assets\img\default-property.jpg" />
-    <Content Include="Content\assets\img\demo\property-1.jpg" />
-    <Content Include="Content\assets\img\demo\property-2.jpg" />
-    <Content Include="Content\assets\img\demo\property-3.jpg" />
-    <Content Include="Content\assets\img\demo\property-4.jpg" />
-    <Content Include="Content\assets\img\demo\property-5.jpg" />
-    <Content Include="Content\assets\img\demo\property-6.jpg" />
-    <Content Include="Content\assets\img\demo\small-proerty-2.jpg" />
-    <Content Include="Content\assets\img\demo\small-property-1.jpg" />
-    <Content Include="Content\assets\img\demo\small-property-2.jpg" />
-    <Content Include="Content\assets\img\demo\small-property-3.jpg" />
-    <Content Include="Content\assets\img\dsdsds33 - Copy.png" />
-    <Content Include="Content\assets\img\footer-logo-2.png" />
-    <Content Include="Content\assets\img\footer-logo.png" />
-    <Content Include="Content\assets\img\hau1.jpg" />
-    <Content Include="Content\assets\img\icon-shearch.png" />
-    <Content Include="Content\assets\img\icon\area.png" />
-    <Content Include="Content\assets\img\icon\bath.png" />
-    <Content Include="Content\assets\img\icon\bid.png" />
-    <Content Include="Content\assets\img\icon\garage.png" />
-    <Content Include="Content\assets\img\icon\status.png" />
-    <Content Include="Content\assets\img\l.png" />
-    <Content Include="Content\assets\img\lgo1.png" />
-    <Content Include="Content\assets\img\logo.png" />
-    <Content Include="Content\assets\img\page-header.jpg" />
-    <Content Include="Content\assets\img\preloader.gif" />
-    <Content Include="Content\assets\img\pro-ads.jpg" />
-    <Content Include="Content\assets\img\property-1\property1.jpg" />
-    <Content Include="Content\assets\img\property-1\property2.jpg" />
-    <Content Include="Content\assets\img\property-1\property3.jpg" />
-    <Content Include="Content\assets\img\property-1\property4.jpg" />
-    <Content Include="Content\assets\img\property-video.jpg" />
-    <Content Include="Content\assets\img\similar\property-1.jpg" />
-    <Content Include="Content\assets\img\similar\property-2.jpg" />
-    <Content Include="Content\assets\img\similar\property-3.jpg" />
-    <Content Include="Content\assets\img\skin\aero%402x.png" />
-    <Content Include="Content\assets\img\skin\aero.png" />
-    <Content Include="Content\assets\img\skin\blue%402x.png" />
-    <Content Include="Content\assets\img\skin\blue.png" />
-    <Content Include="Content\assets\img\skin\green%402x.png" />
-    <Content Include="Content\assets\img\skin\green.png" />
-    <Content Include="Content\assets\img\skin\grey%402x.png" />
-    <Content Include="Content\assets\img\skin\grey.png" />
-    <Content Include="Content\assets\img\skin\orange%402x.png" />
-    <Content Include="Content\assets\img\skin\orange.png" />
-    <Content Include="Content\assets\img\skin\pink%402x.png" />
-    <Content Include="Content\assets\img\skin\pink.png" />
-    <Content Include="Content\assets\img\skin\purple%402x.png" />
-    <Content Include="Content\assets\img\skin\purple.png" />
-    <Content Include="Content\assets\img\skin\red%402x.png" />
-    <Content Include="Content\assets\img\skin\red.png" />
-    <Content Include="Content\assets\img\skin\square%402x.png" />
-    <Content Include="Content\assets\img\skin\square.png" />
-    <Content Include="Content\assets\img\skin\yellow%402x.png" />
-    <Content Include="Content\assets\img\skin\yellow.png" />
-    <Content Include="Content\assets\img\skin\yellow_1.png" />
-    <Content Include="Content\assets\img\slide-2.jpg" />
-    <Content Include="Content\assets\img\slide1\slider-image-1.jpg" />
-    <Content Include="Content\assets\img\slide1\slider-image-2.jpg" />
-    <Content Include="Content\assets\img\slide1\slider-image-3.jpg" />
-    <Content Include="Content\assets\img\slide1\slider-image-4.jpg" />
-    <Content Include="Content\assets\img\slide1\slider-image-5.jpg" />
-    <Content Include="Content\assets\img\slide2\1.jpg" />
-    <Content Include="Content\assets\img\social_big\delicious_grey.png" />
-    <Content Include="Content\assets\img\social_big\delicious_white.png" />
-    <Content Include="Content\assets\img\social_big\digg_grey.png" />
-    <Content Include="Content\assets\img\social_big\digg_white.png" />
-    <Content Include="Content\assets\img\social_big\dribbble_grey.png" />
-    <Content Include="Content\assets\img\social_big\dribbble_white.png" />
-    <Content Include="Content\assets\img\social_big\facebook_grey.png" />
-    <Content Include="Content\assets\img\social_big\facebook_white.png" />
-    <Content Include="Content\assets\img\social_big\linkedin_grey.png" />
-    <Content Include="Content\assets\img\social_big\linkedin_white.png" />
-    <Content Include="Content\assets\img\social_big\rss_grey.png" />
-    <Content Include="Content\assets\img\social_big\rss_white.png" />
-    <Content Include="Content\assets\img\social_big\tumblr_grey.png" />
-    <Content Include="Content\assets\img\social_big\tumblr_white.png" />
-    <Content Include="Content\assets\img\social_big\twitter_grey.png" />
-    <Content Include="Content\assets\img\social_big\twitter_white.png" />
-    <Content Include="Content\assets\img\social_big\vimeo_grey.png" />
-    <Content Include="Content\assets\img\social_big\vimeo_white.png" />
-    <Content Include="Content\assets\img\social_big\youtube_grey.png" />
-    <Content Include="Content\assets\img\social_big\youtube_white.png" />
-    <Content Include="Content\assets\img\welcome-bg.png" />
-    <Content Include="Content\assets\js\bootstrap-hover-dropdown.js" />
-    <Content Include="Content\assets\js\bootstrap-select.min.js" />
-    <Content Include="Content\assets\js\bootstrap-slider.js" />
-    <Content Include="Content\assets\js\bootstrap-wizard.min.js" />
-    <Content Include="Content\assets\js\bootstrap.min.js" />
-    <Content Include="Content\assets\js\easypiechart.min.js" />
-    <Content Include="Content\assets\js\gmaps.init.js" />
-    <Content Include="Content\assets\js\gmaps.js" />
-    <Content Include="Content\assets\js\icheck.min.js" />
-    <Content Include="Content\assets\js\jquery-1.10.2.min.js" />
-    <Content Include="Content\assets\js\jquery.ba-cond.min.js" />
-    <Content Include="Content\assets\js\jquery.bootstrap.wizard.js" />
-    <Content Include="Content\assets\js\jquery.easypiechart.min.js" />
-    <Content Include="Content\assets\js\jquery.slitslider.js" />
-    <Content Include="Content\assets\js\jquery.validate.min.js" />
-    <Content Include="Content\assets\js\lightslider.min.js" />
-    <Content Include="Content\assets\js\main.js" />
-    <Content Include="Content\assets\js\modernizr-2.6.2.min.js" />
-    <Content Include="Content\assets\js\modernizr.custom.79639.js" />
-    <Content Include="Content\assets\js\owl.carousel.min.js" />
-    <Content Include="Content\assets\js\plugins.js" />
-    <Content Include="Content\assets\js\price-range.js" />
-    <Content Include="Content\assets\js\wizard.js" />
-    <Content Include="Content\assets\js\wow.js" />
-    <Content Include="Content\assets\js\wow.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap\css\bootstrap.css" />
-    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\bootstrap\js\bootstrap.js" />
-    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\bootstrap\js\npm.js" />
+    <Content Include="Content\Hata\css\bootstrap.min.css" />
+    <Content Include="Content\Hata\css\flexslider.css" />
+    <Content Include="Content\Hata\css\font-awesome.min.css" />
+    <Content Include="Content\Hata\css\green.css" />
+    <Content Include="Content\Hata\css\images\ui-bg_flat_0_aaaaaa_40x100.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_flat_75_ffffff_40x100.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_glass_55_fbf9ee_1x400.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_glass_65_ffffff_1x400.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_glass_75_dadada_1x400.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_glass_75_e6e6e6_1x400.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_glass_95_fef1ec_1x400.html" />
+    <Content Include="Content\Hata\css\images\ui-bg_highlight-soft_75_cccccc_1x100.html" />
+    <Content Include="Content\Hata\css\images\ui-icons_222222_256x240.html" />
+    <Content Include="Content\Hata\css\images\ui-icons_2e83ff_256x240.html" />
+    <Content Include="Content\Hata\css\images\ui-icons_454545_256x240.html" />
+    <Content Include="Content\Hata\css\images\ui-icons_888888_256x240.html" />
+    <Content Include="Content\Hata\css\images\ui-icons_cd0a0a_256x240.html" />
+    <Content Include="Content\Hata\css\jquery-ui.css" />
+    <Content Include="Content\Hata\css\jquery.selectBox.css" />
+    <Content Include="Content\Hata\css\pace-minimal.css" />
+    <Content Include="Content\Hata\css\responsive.css" />
+    <Content Include="Content\Hata\css\style.css" />
+    <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.html" />
+    <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.svg" />
+    <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.html" />
+    <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Hata\images\about.png" />
+    <Content Include="Content\Hata\images\about2.png" />
+    <Content Include="Content\Hata\images\accordion-arrow.png" />
+    <Content Include="Content\Hata\images\agent-pic.png" />
+    <Content Include="Content\Hata\images\arrow-next.png" />
+    <Content Include="Content\Hata\images\arrow-prev.png" />
+    <Content Include="Content\Hata\images\avatar1.png" />
+    <Content Include="Content\Hata\images\avatar2.png" />
+    <Content Include="Content\Hata\images\avatar3.png" />
+    <Content Include="Content\Hata\images\banner-agent.png" />
+    <Content Include="Content\Hata\images\banner-history.png" />
+    <Content Include="Content\Hata\images\banner-partners.png" />
+    <Content Include="Content\Hata\images\banner-pricing.png" />
+    <Content Include="Content\Hata\images\check-box-checked.png" />
+    <Content Include="Content\Hata\images\check-box.png" />
+    <Content Include="Content\Hata\images\comment-icon.png" />
+    <Content Include="Content\Hata\images\corner.png" />
+    <Content Include="Content\Hata\images\date-icon.png" />
+    <Content Include="Content\Hata\images\drop-arrow.png" />
+    <Content Include="Content\Hata\images\element-book.png" />
+    <Content Include="Content\Hata\images\element-bus.png" />
+    <Content Include="Content\Hata\images\element-market.png" />
+    <Content Include="Content\Hata\images\element-school.png" />
+    <Content Include="Content\Hata\images\fact1.png" />
+    <Content Include="Content\Hata\images\fact2.png" />
+    <Content Include="Content\Hata\images\fact3.png" />
+    <Content Include="Content\Hata\images\fact4.png" />
+    <Content Include="Content\Hata\images\filter-pattren.png" />
+    <Content Include="Content\Hata\images\footer-logo.png" />
+    <Content Include="Content\Hata\images\g1.png" />
+    <Content Include="Content\Hata\images\g10.png" />
+    <Content Include="Content\Hata\images\g11.jpg" />
+    <Content Include="Content\Hata\images\g12.jpg" />
+    <Content Include="Content\Hata\images\g13.jpg" />
+    <Content Include="Content\Hata\images\g14.jpg" />
+    <Content Include="Content\Hata\images\g15.jpg" />
+    <Content Include="Content\Hata\images\g16.jpg" />
+    <Content Include="Content\Hata\images\g17.jpg" />
+    <Content Include="Content\Hata\images\g18.jpg" />
+    <Content Include="Content\Hata\images\g19.jpg" />
+    <Content Include="Content\Hata\images\g2.png" />
+    <Content Include="Content\Hata\images\g20.jpg" />
+    <Content Include="Content\Hata\images\g3.png" />
+    <Content Include="Content\Hata\images\g4.png" />
+    <Content Include="Content\Hata\images\g5.png" />
+    <Content Include="Content\Hata\images\g6.png" />
+    <Content Include="Content\Hata\images\g7.png" />
+    <Content Include="Content\Hata\images\g8.png" />
+    <Content Include="Content\Hata\images\g9.png" />
+    <Content Include="Content\Hata\images\gift-design.png" />
+    <Content Include="Content\Hata\images\green%402x.html" />
+    <Content Include="Content\Hata\images\icon-address.png" />
+    <Content Include="Content\Hata\images\icon-area.png" />
+    <Content Include="Content\Hata\images\icon-bath-w.png" />
+    <Content Include="Content\Hata\images\icon-bath.png" />
+    <Content Include="Content\Hata\images\icon-bed-w.png" />
+    <Content Include="Content\Hata\images\icon-bed.png" />
+    <Content Include="Content\Hata\images\icon-car.png" />
+    <Content Include="Content\Hata\images\icon-cycle.png" />
+    <Content Include="Content\Hata\images\icon-garage.png" />
+    <Content Include="Content\Hata\images\icon-gym-w.png" />
+    <Content Include="Content\Hata\images\icon-gym.png" />
+    <Content Include="Content\Hata\images\icon-kitchen.png" />
+    <Content Include="Content\Hata\images\icon-phone.png" />
+    <Content Include="Content\Hata\images\icon-pool.png" />
+    <Content Include="Content\Hata\images\icon-walk.png" />
+    <Content Include="Content\Hata\images\items\1.png" />
+    <Content Include="Content\Hata\images\items\10.png" />
+    <Content Include="Content\Hata\images\items\11.png" />
+    <Content Include="Content\Hata\images\items\12.png" />
+    <Content Include="Content\Hata\images\items\2.png" />
+    <Content Include="Content\Hata\images\items\3.png" />
+    <Content Include="Content\Hata\images\items\4.png" />
+    <Content Include="Content\Hata\images\items\5.png" />
+    <Content Include="Content\Hata\images\items\6.png" />
+    <Content Include="Content\Hata\images\items\7.png" />
+    <Content Include="Content\Hata\images\items\8.png" />
+    <Content Include="Content\Hata\images\items\9.png" />
+    <Content Include="Content\Hata\images\logo.png" />
+    <Content Include="Content\Hata\images\logo1.png" />
+    <Content Include="Content\Hata\images\logo2.png" />
+    <Content Include="Content\Hata\images\logo3.png" />
+    <Content Include="Content\Hata\images\logo4.png" />
+    <Content Include="Content\Hata\images\logo5.png" />
+    <Content Include="Content\Hata\images\logo6.png" />
+    <Content Include="Content\Hata\images\nearby1.png" />
+    <Content Include="Content\Hata\images\nearby2.png" />
+    <Content Include="Content\Hata\images\nearby3.png" />
+    <Content Include="Content\Hata\images\pattern2.jpg" />
+    <Content Include="Content\Hata\images\post1.png" />
+    <Content Include="Content\Hata\images\post2.png" />
+    <Content Include="Content\Hata\images\post3.png" />
+    <Content Include="Content\Hata\images\post4.png" />
+    <Content Include="Content\Hata\images\post5.png" />
+    <Content Include="Content\Hata\images\post6.png" />
+    <Content Include="Content\Hata\images\pro-big.jpg" />
+    <Content Include="Content\Hata\images\pro-thumb1.jpg" />
+    <Content Include="Content\Hata\images\pro-thumb2.jpg" />
+    <Content Include="Content\Hata\images\pro-thumb3.jpg" />
+    <Content Include="Content\Hata\images\qoute-arrow1.png" />
+    <Content Include="Content\Hata\images\qoute-arrow2.png" />
+    <Content Include="Content\Hata\images\select-arrow.png" />
+    <Content Include="Content\Hata\images\service1.png" />
+    <Content Include="Content\Hata\images\service2.png" />
+    <Content Include="Content\Hata\images\service3.png" />
+    <Content Include="Content\Hata\images\service4.png" />
+    <Content Include="Content\Hata\images\service5.png" />
+    <Content Include="Content\Hata\images\slider-2.jpg" />
+    <Content Include="Content\Hata\images\slider-3.jpg" />
+    <Content Include="Content\Hata\images\slider-4.jpg" />
+    <Content Include="Content\Hata\images\slider-5.jpg" />
+    <Content Include="Content\Hata\images\slider-detail.png" />
+    <Content Include="Content\Hata\images\slider.jpg" />
+    <Content Include="Content\Hata\images\team-single.png" />
+    <Content Include="Content\Hata\images\team1.png" />
+    <Content Include="Content\Hata\images\team2.png" />
+    <Content Include="Content\Hata\images\team3.png" />
+    <Content Include="Content\Hata\images\team4.png" />
+    <Content Include="Content\Hata\images\team5.png" />
+    <Content Include="Content\Hata\images\team6.png" />
+    <Content Include="Content\Hata\images\tick.png" />
+    <Content Include="Content\Hata\images\zoom.png" />
+    <Content Include="Content\Hata\js\bootstrap.min.js" />
+    <Content Include="Content\Hata\js\counter.animation.js" />
+    <Content Include="Content\Hata\js\custom.js" />
+    <Content Include="Content\Hata\js\gmap-properties.js" />
+    <Content Include="Content\Hata\js\gmap.js" />
+    <Content Include="Content\Hata\js\icheck.js" />
+    <Content Include="Content\Hata\js\jquery-1.11.3.min.js" />
+    <Content Include="Content\Hata\js\jquery-ui.js" />
+    <Content Include="Content\Hata\js\jquery.appear.js" />
+    <Content Include="Content\Hata\js\jquery.cycle2.js" />
+    <Content Include="Content\Hata\js\jquery.flexslider-min.js" />
+    <Content Include="Content\Hata\js\jquery.selectBox.min.js" />
+    <Content Include="Content\Hata\js\masonry.pkgd.min.js" />
+    <Content Include="Content\Hata\js\pace.js" />
     <Content Include="Content\Login\css\font-awesome.css" />
     <Content Include="Content\Login\css\style.css" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Login\images\banner.jpg" />
+    <Content Include="Content\Login\images\lolo.jpg" />
     <Content Include="Content\Login\images\overlay.png" />
+    <Content Include="Content\Login\images\slider-4.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Sig\css\font-awesome.css" />
+    <Content Include="Content\Sig\css\style.css" />
+    <Content Include="Content\Sig\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Sig\images\banner.jpg" />
+    <Content Include="Content\Sig\images\lolo.jpg" />
+    <Content Include="Content\Sig\images\overlay.png" />
+    <Content Include="Content\Sig\images\slider-4.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\IMG_1592-stamp.jpg" />
-    <Content Include="Images\PIS3280-Edit-stamp.jpg" />
-    <Content Include="Images\PIS3611.jpg" />
-    <Content Include="Images\PIS_4622-Edit.jpg" />
-    <Content Include="Images\PIS_6656-Edit-stamp.jpg" />
-    <Content Include="Images\PIS_6706-Edit-stamp.jpg" />
-    <Content Include="Images\PIS_7319-Edit-stamp.jpg" />
-    <Content Include="Images\PIS_7389-Edit-stamp.jpg" />
-    <Content Include="Images\PIS_7432-Edit-stamp.jpg" />
-    <Content Include="Images\sunshine-benthanh-cityhome-10-stamp.jpg" />
+    <Content Include="Images\1.png" />
+    <Content Include="Images\10.png" />
+    <Content Include="Images\11.png" />
+    <Content Include="Images\12.png" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\3.png" />
+    <Content Include="Images\4.png" />
+    <Content Include="Images\5.png" />
+    <Content Include="Images\6.png" />
+    <Content Include="Images\7.png" />
+    <Content Include="Images\8.png" />
+    <Content Include="Images\9.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -546,29 +575,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont_1.eot" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont_1.ttf" />
-    <Content Include="Content\assets\fonts\fontawesome-webfont_1.woff" />
-    <Content Include="Content\assets\fonts\FontAwesome.otf" />
-    <Content Include="Content\assets\fonts\FontAwesome_1.otf" />
-    <Content Include="Content\assets\fonts\fontello\fontello.eot" />
-    <Content Include="Content\assets\fonts\fontello\fontello.ttf" />
-    <Content Include="Content\assets\fonts\fontello\fontello.woff" />
-    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\assets\fonts\icon-7-stroke\fonts\Pe-icon-7-stroke.eot" />
-    <Content Include="Content\assets\fonts\icon-7-stroke\fonts\Pe-icon-7-stroke.ttf" />
-    <Content Include="Content\assets\fonts\icon-7-stroke\fonts\Pe-icon-7-stroke.woff" />
-    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Admin\assets\font-awesome\4.5.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\assets\font-awesome\4.5.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Admin\assets\font-awesome\4.5.0\fonts\fontawesome-webfont.woff" />
@@ -586,7 +592,29 @@
     <Content Include="Content\Login\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Login\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Client\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Login.cshtml">
+      <BrowseToURL>
+      </BrowseToURL>
+    </Content>
+    <Content Include="Areas\Admin\Views\AdminProperty\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminProperty\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Edit.cshtml" />
+    <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.eot" />
+    <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.ttf" />
+    <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.woff" />
+    <Content Include="Content\Hata\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Hata\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="Areas\Admin\Views\Client\Register.cshtml" />
+    <Content Include="Content\Sig\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Sig\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Sig\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Sig\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Sig\fonts\FontAwesome.otf" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -594,10 +622,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\AdminProperty\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminProperty\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -638,6 +662,11 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Details\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\PROPERTies\Create.cshtml" />
+    <Content Include="Views\PROPERTies\Delete.cshtml" />
+    <Content Include="Views\PROPERTies\Details.cshtml" />
+    <Content Include="Views\PROPERTies\Edit.cshtml" />
+    <Content Include="Views\PROPERTies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

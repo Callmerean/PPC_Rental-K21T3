@@ -25,13 +25,16 @@ namespace PPC_Rental.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ABOUT> ABOUTs { get; set; }
         public virtual DbSet<DISTRICT> DISTRICTs { get; set; }
         public virtual DbSet<FEATURE> FEATUREs { get; set; }
+        public virtual DbSet<NEWS> NEWS { get; set; }
         public virtual DbSet<PROJECT_STATUS> PROJECT_STATUS { get; set; }
         public virtual DbSet<PROPERTY> PROPERTies { get; set; }
         public virtual DbSet<PROPERTY_FEATURE> PROPERTY_FEATURE { get; set; }
         public virtual DbSet<PROPERTY_TYPE> PROPERTY_TYPE { get; set; }
         public virtual DbSet<STREET> STREETs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<USER> USERs { get; set; }
         public virtual DbSet<WARD> WARDs { get; set; }
     }
