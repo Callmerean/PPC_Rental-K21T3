@@ -66,14 +66,22 @@ namespace PPC_Rental.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Search(int? dis, int? propertytype, int? bed, int? bath, int? price, int? pricerange)
+        [HttpPost]
+        public ActionResult Search(int? dis, int? propertytype, int? bed, int? bath, string price)
         {
+            string[] arr = price.Split('-');
+            int min = 0;
+            int max = 0;
+            if (arr.Length > 1)
+            {
+                min = int.Parse(arr[0]);
+                max = int.Parse(arr[1]);
+            }
 
             var property = model.PROPERTies.ToList();
             if (propertytype != null)
             {
-                property = property.Where(x => x.PropertyType_ID == propertytype).ToList();
+                property = property.Where(x => x.PropertyType_ID == propertytype ).ToList();
             }
             if (dis != null)
             {
@@ -87,7 +95,16 @@ namespace PPC_Rental.Controllers
             {
                 property = property.Where(x => x.BathRoom == bath).ToList();
             }
-            return View(property);
+            if (min != 0)
+            {
+                property = property.Where(p => p.Price >= min).ToList();
+            }
+            if (max != 0)
+            {
+                property = property.Where(p => p.Price <= max).ToList();
+            }
+
+            return PartialView(property);
 
 
 

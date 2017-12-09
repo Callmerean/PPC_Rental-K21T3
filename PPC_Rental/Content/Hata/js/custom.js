@@ -63,13 +63,14 @@ jQuery(document).ready(function($) {
     $( "#price-range" ).slider({
         range: true,
         min: 10000,
-        max: 100000,
-        values: [ 30000, 50000 ],
-        slide: function( event, ui ) {
+        max: 1000000,
+        values: [ 30000, 500000 ],
+        slide: function (event, ui) {
+            //console.log(ui.values[1]);
             $( "#price" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
         }
     });
-    $( "#price" ).val( $( "#price-range" ).slider( "values", 0 ) + " - " + $( "#price-range" ).slider( "values", 1 ) );
+   $( "#price" ).val( $( "#price-range" ).slider( "values", 0 ) + " - " + $( "#price-range" ).slider( "values", 1 ) );
 
     // Checkbox Replacements
 
