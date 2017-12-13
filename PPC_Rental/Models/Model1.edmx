@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DemoPPCRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DemoPPCRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABOUT">
           <Key>
             <PropertyRef Name="ID" />
@@ -219,7 +219,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PROPERTY_STREET1">
+        <Association Name="FK_PROPERTY_STREET">
           <End Role="STREET" Type="Self.STREET" Multiplicity="0..1" />
           <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,7 +251,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROPERTY">
-              <PropertyRef Name="Sale_ID" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -332,7 +332,7 @@
             <End Role="PROPERTY_TYPE" EntitySet="PROPERTY_TYPE" />
             <End Role="PROPERTY" EntitySet="PROPERTY" />
           </AssociationSet>
-          <AssociationSet Name="FK_PROPERTY_STREET1" Association="Self.FK_PROPERTY_STREET1">
+          <AssociationSet Name="FK_PROPERTY_STREET" Association="Self.FK_PROPERTY_STREET">
             <End Role="STREET" EntitySet="STREET" />
             <End Role="PROPERTY" EntitySet="PROPERTY" />
           </AssociationSet>
@@ -444,7 +444,7 @@
           <NavigationProperty Name="PROJECT_STATUS" Relationship="Self.FK_PROPERTY_PROJECT_STATUS" FromRole="PROPERTY" ToRole="PROJECT_STATUS" />
           <NavigationProperty Name="PROPERTY_FEATURE" Relationship="Self.FK_PROPERTY_FEATURE_PROPERTY" FromRole="PROPERTY" ToRole="PROPERTY_FEATURE" />
           <NavigationProperty Name="PROPERTY_TYPE" Relationship="Self.FK_PROPERTY_PROPERTY_TYPE" FromRole="PROPERTY" ToRole="PROPERTY_TYPE" />
-          <NavigationProperty Name="STREET" Relationship="Self.FK_PROPERTY_STREET1" FromRole="PROPERTY" ToRole="STREET" />
+          <NavigationProperty Name="STREET" Relationship="Self.FK_PROPERTY_STREET" FromRole="PROPERTY" ToRole="STREET" />
           <NavigationProperty Name="USER" Relationship="Self.FK_PROPERTY_USER" FromRole="PROPERTY" ToRole="USER" />
           <NavigationProperty Name="USER1" Relationship="Self.FK_PROPERTY_USER1" FromRole="PROPERTY" ToRole="USER" />
           <NavigationProperty Name="WARD" Relationship="Self.FK_PROPERTY_WARD" FromRole="PROPERTY" ToRole="WARD" />
@@ -478,7 +478,7 @@
           <Property Name="District_ID" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="DISTRICT" Relationship="Self.FK_STREET_DISTRICT" FromRole="STREET" ToRole="DISTRICT" />
-          <NavigationProperty Name="PROPERTies" Relationship="Self.FK_PROPERTY_STREET1" FromRole="STREET" ToRole="PROPERTY" />
+          <NavigationProperty Name="PROPERTies" Relationship="Self.FK_PROPERTY_STREET" FromRole="STREET" ToRole="PROPERTY" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -626,7 +626,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PROPERTY_STREET1">
+        <Association Name="FK_PROPERTY_STREET">
           <End Role="STREET" Type="Self.STREET" Multiplicity="0..1" />
           <End Role="PROPERTY" Type="Self.PROPERTY" Multiplicity="*" />
           <ReferentialConstraint>
@@ -658,7 +658,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROPERTY">
-              <PropertyRef Name="Sale_ID" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -723,7 +723,7 @@
             <End Role="PROPERTY_TYPE" EntitySet="PROPERTY_TYPE" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
           </AssociationSet>
-          <AssociationSet Name="FK_PROPERTY_STREET1" Association="Self.FK_PROPERTY_STREET1">
+          <AssociationSet Name="FK_PROPERTY_STREET" Association="Self.FK_PROPERTY_STREET">
             <End Role="STREET" EntitySet="STREETs" />
             <End Role="PROPERTY" EntitySet="PROPERTies" />
           </AssociationSet>

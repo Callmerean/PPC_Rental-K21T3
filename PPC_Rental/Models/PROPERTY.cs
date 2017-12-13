@@ -12,8 +12,7 @@ namespace PPC_Rental.Models
     using System;
     using System.Collections.Generic;
     using System.Web;
-
-
+    
     public partial class PROPERTY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +20,7 @@ namespace PPC_Rental.Models
         {
             this.PROPERTY_FEATURE = new HashSet<PROPERTY_FEATURE>();
         }
-
+    
         public int ID { get; set; }
         public string PropertyName { get; set; }
         public string Avatar { get; set; }
@@ -44,7 +43,7 @@ namespace PPC_Rental.Models
         public string Note { get; set; }
         public Nullable<System.DateTime> Updated_at { get; set; }
         public Nullable<int> Sale_ID { get; set; }
-
+    
         public virtual DISTRICT DISTRICT { get; set; }
         public virtual PROJECT_STATUS PROJECT_STATUS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -54,8 +53,8 @@ namespace PPC_Rental.Models
         public virtual USER USER { get; set; }
         public virtual USER USER1 { get; set; }
         public virtual WARD WARD { get; set; }
-
-        public HttpPostedFileBase ImageFile{ get; set; }
+        
+        public HttpPostedFileBase ImageFile { get; set; }
         public IEnumerable< HttpPostedFileBase> ImageFile1 { get; set; }
     }
 }

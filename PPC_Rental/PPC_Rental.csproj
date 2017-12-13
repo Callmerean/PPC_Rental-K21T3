@@ -51,6 +51,9 @@
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.0.5797.27534, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -172,12 +175,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminPropertyController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AjaxFilterController.cs" />
-    <Compile Include="Controllers\DetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PROPERTiesController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -592,16 +594,16 @@
     <Content Include="Content\Login\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Login\fonts\FontAwesome.otf" />
-    <Content Include="Areas\Admin\Views\Client\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Login.cshtml">
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\Login.cshtml">
       <BrowseToURL>
       </BrowseToURL>
     </Content>
     <Content Include="Areas\Admin\Views\AdminProperty\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Delete.cshtml" />
+    <Content Include="Views\Client\Create.cshtml" />
+    <Content Include="Views\Client\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\AdminProperty\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Client\Edit.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.eot" />
     <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.ttf" />
     <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.woff" />
@@ -610,7 +612,7 @@
     <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Hata\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Hata\fonts\glyphicons-halflings-regulard41d.eot" />
-    <Content Include="Areas\Admin\Views\Client\Register.cshtml" />
+    <Content Include="Views\Client\Register.cshtml" />
     <Content Include="Content\Sig\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Sig\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Sig\fonts\fontawesome-webfont.woff" />
@@ -661,19 +663,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Details\Details.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\PROPERTies\Create.cshtml" />
-    <Content Include="Views\PROPERTies\Delete.cshtml" />
-    <Content Include="Views\PROPERTies\Details.cshtml" />
-    <Content Include="Views\PROPERTies\Edit.cshtml" />
-    <Content Include="Views\PROPERTies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="MultipleImages\" />
-    <Folder Include="Views\AjaxFilter\" />
+    <Folder Include="Views\About\" />
+    <Folder Include="Views\News\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

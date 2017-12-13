@@ -95,28 +95,22 @@ namespace PPC_Rental.Controllers
             {
                 property = property.Where(x => x.BathRoom == bath).ToList();
             }
-            if (min != 0)
+            if (min != 0 && max != 0)
             {
-                property = property.Where(p => p.Price >= min).ToList();
+                property = property.Where(p => p.Price >= min && p.Price <= max).ToList();
             }
-            if (max != 0)
-            {
-                property = property.Where(p => p.Price <= max).ToList();
-            }
+            
 
             return PartialView(property);
 
 
 
         }
-        public JsonResult GetPrice(int cos)
+        
+        public ActionResult Details(int id)
         {
-            var db = new DemoPPCRentalEntities1();
-            var cost = db.PROPERTies.Where(s => s.Price == cos);
-            return Json(cost.Select(s => new
-            {
-               
-            }), JsonRequestBehavior.AllowGet);
+            var property = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            return View(property);
         }
 
     }

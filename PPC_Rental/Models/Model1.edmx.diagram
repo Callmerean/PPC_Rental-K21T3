@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0392f568ae434833977c7d19d6a1c0fa" Name="Diagram1">
+      <Diagram DiagramId="da4f30c5b70d45bfb305c94c43a668bf" Name="Diagram1">
         <EntityTypeShape EntityType="DemoPPCRentalModel.ABOUT" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoPPCRentalModel.DISTRICT" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoPPCRentalModel.FEATURE" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
@@ -26,7 +26,7 @@
         <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_PROJECT_STATUS" ManuallyRouted="false" />
         <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_FEATURE_PROPERTY" ManuallyRouted="false" />
         <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_PROPERTY_TYPE" ManuallyRouted="false" />
-        <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_STREET1" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_STREET" ManuallyRouted="false" />
         <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_USER" ManuallyRouted="false" />
         <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_USER1" ManuallyRouted="false" />
         <AssociationConnector Association="DemoPPCRentalModel.FK_PROPERTY_WARD" ManuallyRouted="false" />
