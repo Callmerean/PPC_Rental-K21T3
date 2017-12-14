@@ -110,5 +110,9 @@ namespace PPC_Rental.Models
         {
             return db.USERs.Count(x => x.Email == email) > 0;
         }
+        public bool CheckPropertyName(string propertyname)
+        {
+            return db.PROPERTies.Count(x => x.PropertyName == propertyname) > 0;
+        }
     }
 }

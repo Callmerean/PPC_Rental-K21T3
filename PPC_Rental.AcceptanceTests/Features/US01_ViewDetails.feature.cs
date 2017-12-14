@@ -18,7 +18,7 @@ namespace PPC_Rental.AcceptanceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class PropertyDetailFeature
+    public partial class US04_PropertyDetailsFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -44,7 +44,9 @@ namespace PPC_Rental.AcceptanceTests.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Property Detail", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US04 - property details", "\tAs a potential customer\r\n\tI want to see the details of a property\r\n\tSo that I ca" +
+                    "n better decide to buy it.", ProgrammingLanguage.CSharp, new string[] {
+                        "automated"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -59,9 +61,9 @@ namespace PPC_Rental.AcceptanceTests.Features
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Property Detail")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "US04 - property details")))
             {
-                global::PPC_Rental.AcceptanceTests.Features.PropertyDetailFeature.FeatureSetup(null);
+                global::PPC_Rental.AcceptanceTests.Features.US04_PropertyDetailsFeature.FeatureSetup(null);
             }
         }
         
@@ -82,22 +84,83 @@ namespace PPC_Rental.AcceptanceTests.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UC01_ViewDetail")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Property Detail")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
-        public virtual void UC01_ViewDetail()
+        public virtual void FeatureBackground()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("UC01_ViewDetail", new string[] {
-                        "mytag"});
-#line 5
+#line 10
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "PropertyName",
+                        "Area",
+                        "Price"});
+            table1.AddRow(new string[] {
+                        "PIS Top Apartment",
+                        "120m2",
+                        "10000"});
+            table1.AddRow(new string[] {
+                        "ICON 56 – Modern Style Apartment",
+                        "130m2",
+                        "30000"});
+            table1.AddRow(new string[] {
+                        "PIS Serviced Apartment – Boho Style",
+                        "120m2",
+                        "70000"});
+            table1.AddRow(new string[] {
+                        "Bigroom with Riverview",
+                        "200m2",
+                        "90000"});
+            table1.AddRow(new string[] {
+                        "PIS Serviced Apartment – Style 3",
+                        "130m2",
+                        "30000"});
+            table1.AddRow(new string[] {
+                        "Vinhomes Central Park L2 – Duong’s Apartment",
+                        "150m2",
+                        "110000"});
+            table1.AddRow(new string[] {
+                        "Saigon Pearl Ruby Block",
+                        "130m2",
+                        "30000"});
+            table1.AddRow(new string[] {
+                        "Nguyen Dinh Chinh – Duplex with Balcony",
+                        "120m2",
+                        "200000"});
+            table1.AddRow(new string[] {
+                        "Sunshine Ben Thanh",
+                        "130m2",
+                        "40000"});
+            table1.AddRow(new string[] {
+                        "Cosiana Apartment with Balcony",
+                        "500m2",
+                        "990000"});
+#line 11
+ testRunner.Given("the following propertys", ((string)(null)), table1, "Given ");
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("The property detail be showed")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "US04 - property details")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("automated")]
+        public virtual void ThePropertyDetailBeShowed()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The property detail be showed", ((string[])(null)));
+#line 25
 this.ScenarioSetup(scenarioInfo);
-#line 6
- testRunner.Given("I\'m in PPC Main Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 7
- testRunner.When("I click button view detail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 8
- testRunner.Then("I will see View Detail Of Project Page \'Cosiana Apartment with Balcony\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 10
+this.FeatureBackground();
+#line 26
+ testRunner.When("I open the details of \'Analysis Patterns\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "PropertyName",
+                        "Area",
+                        "Price"});
+            table2.AddRow(new string[] {
+                        "Cosiana Apartment with Balcony",
+                        "500m2",
+                        "990000"});
+#line 27
+ testRunner.Then("the property details should show", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

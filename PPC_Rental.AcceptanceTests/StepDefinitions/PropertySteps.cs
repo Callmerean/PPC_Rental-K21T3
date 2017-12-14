@@ -1,13 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using TechTalk.SpecFlow;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using System.Threading;
-using FluentAssertions;
-using PPC_Rental.Models;
+using PPC_Rental.AcceptanceTests.Drivers.PropertyDetails;
 
 
 namespace PPC_Rental.AcceptanceTests.StepDefinitions
@@ -15,40 +8,29 @@ namespace PPC_Rental.AcceptanceTests.StepDefinitions
     [Binding]
    public class UC003_ViewDetailSteps
     {
-        private IWebDriver driver = new FirefoxDriver();
-        [Given(@"I'm in PPC Main Page")]
-        public void GivenIMInPPCMainPage()
+        private readonly PropertyDetailsDriver _propertyDriver;
+
+        public UC003_ViewDetailSteps(PropertyDetailsDriver driver)
         {
-            driver.Navigate().GoToUrl("http://localhost:4675/");
-            Thread.Sleep(1000);
+            _propertyDriver = driver;
         }
 
-        [When(@"I click button view detail")]
-        public void WhenIClickButtonViewDetail()
+        [Given(@"the following propertys")]
+        public void GivenTheFollowingpropertys(Table givenpropertys)
         {
-            driver.Navigate().GoToUrl("http://localhost:4675/Home/Details/16");
-            Thread.Sleep(1000);
+            _propertyDriver.InsertpropertyToDB(givenpropertys);
         }
 
-        [Then(@"I will see View Detail Of Project Page '(.*)'")]
-        public void ThenIWillSeeViewDetailOfProjectPage(string expectedTitles)
+        [When(@"I open the details of '(.*)'")]
+        public void WhenIOpenTheDetailsOf(string propertyId)
         {
-            var expectedResult = expectedTitles.Split(',').Select(x => x.Trim('\''));
-            driver.SwitchTo().DefaultContent();
-
-            var viewdetail = from row in driver.FindElements(By.XPath("//div[contains(@id,'detail-header')]/p"))
-                             let Name = row.Text
-                             select new PROPERTY { PropertyName = Name };
-
-            AssertionDetail.ViewDetailProject(viewdetail, expectedResult);
-
+            _propertyDriver.OpenpropertyDetails(propertyId);
         }
-        public class AssertionDetail
+
+        [Then(@"the property details should show")]
+        public void ThenThepropertyDetailsShouldShow(Table shownpropertyDetails)
         {
-            public static void ViewDetailProject(IEnumerable<PROPERTY> viewdetail, IEnumerable<string> expectedTitles)
-            {
-                viewdetail.Select(x => x.PropertyName).Should().Contain(expectedTitles);
-            }
+            _propertyDriver.ShowpropertyDetails(shownpropertyDetails);
         }
     }
 

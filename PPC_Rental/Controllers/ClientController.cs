@@ -320,5 +320,8 @@ namespace PPC_Rental.Areas.Admin.Controllers
             //ViewBag.sale = model.Sla.ToList();
 
         }
+
+
+
     }
 }

@@ -60,7 +60,7 @@ namespace PPC_Rental.AcceptanceTests.Drivers.PropertyDetails
             actualPropertyDetails.Should().Match<PROPERTY>(
                 b => b.Area == expectedPropertyDetails["Area"]
                 && b.PropertyName == expectedPropertyDetails["PropertyName"]
-                && b.Price == decimal.Parse(expectedPropertyDetails["Price"]));
+                && b.Price == int.Parse(expectedPropertyDetails["Price"]));
         }
 
         public void OpenpropertyDetails(string propertyId)
