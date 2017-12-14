@@ -105,7 +105,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\PPC_Rental.UITests.Selenium\UC01_FilterProjectSteps.cs">
+      <Link>UC01_FilterProjectSteps.cs</Link>
+    </Compile>
     <Compile Include="Drivers\PropertyDetails\PropertyDetailsDriver.cs" />
+    <Compile Include="Features\UC01_FilterProject.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UC01_FilterProject.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\UC02_ViewListOfProject.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UC02_ViewListOfProject.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\UC05_ViewListOfAgencyProject.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UC05_ViewListOfAgencyProject.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\US01_ViewDetails.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,9 +135,23 @@
     <Compile Include="Support\HttpContextBase.cs" />
     <Compile Include="Support\PropertyContext.cs" />
     <Compile Include="Support\ReferencePropertyList.cs" />
+    <Compile Include="UC02_ViewListOfProjectStep.cs" />
+    <Compile Include="UC05_ViewListOfAgencyProjectStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\UC01_FilterProject.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UC01_FilterProject.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\UC02_ViewListOfProject.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UC02_ViewListOfProject.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\UC05_ViewListOfAgencyProject.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UC05_ViewListOfAgencyProject.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\US01_ViewDetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>US01_ViewDetails.feature.cs</LastGenOutput>
