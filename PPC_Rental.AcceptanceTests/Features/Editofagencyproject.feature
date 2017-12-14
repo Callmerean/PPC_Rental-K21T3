@@ -13,7 +13,7 @@ Scenario: Successful Edit of Project
 	Given Mở trang trủ
 	When Bấm vào nút login
 	When Nhập tài khoảng
-	| UserName                 | PassWord  |
-	| lythihuyenchau@gmail.com | 123456    |
+	| UserName                 | PassWord     |
+	| lythihuyenchau@gmail.com | 123456       |
 	When Agency bấm vào Edit Agency project
 	Then Agency bấm vào OK.
