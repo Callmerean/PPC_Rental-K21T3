@@ -43,7 +43,7 @@ namespace PPC_Rental.UITests.Selenium.Support
             browser.FindElements(By.Id(buttonId)).First().Click();
         }
 
-        public static void ClickLinkByHref(this IWebDriver browser, string bookId)
+        public static void ClickLinkByHref(this IWebDriver browser, string propertyId)
         {
             //Fetch all links by href
             List<IWebElement> anchors = new List<IWebElement>(browser.FindElements(By.TagName("a")));
@@ -56,7 +56,7 @@ namespace PPC_Rental.UITests.Selenium.Support
                     IWebElement anchor = anchors[i];
 
                     string hreflink = ((IWebElement)anchors).GetAttribute("href");
-                    if (hreflink.Substring(hreflink.IndexOf("?")).Contains(bookId))
+                    if (hreflink.Substring(hreflink.IndexOf("?")).Contains(propertyId))
                     {
                         anchor.Click();
                         break;

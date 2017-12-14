@@ -38,7 +38,7 @@ namespace PPC_Rental.AcceptanceTests.Drivers.PropertyDetails
                     };
 
                     _context.ReferenceProperties.Add(
-                            Properties.Header.Contains("Id") ? row["Id"] : property.Area,
+                            Properties.Header.Contains("ID") ? row["ID"] : property.Area,
                             property);
 
                     db.PROPERTies.Add(property);

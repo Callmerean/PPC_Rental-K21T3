@@ -58,7 +58,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 string filename = Path.GetFileNameWithoutExtension(property.ImageFile.FileName);
                 string extension = Path.GetExtension(property.ImageFile.FileName);
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                property.Avatar = "~/Images/" + filename;
+                property.Avatar =  filename;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
                 // Avatar
 
@@ -73,7 +73,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                     //property.ImageFile2.SaveAs(filename2);
                     property.ImageFile.SaveAs(filename);
                 }
-
+                property.Sale_ID = 1;
 
 
                 // TODO: Add insert logic here
@@ -130,7 +130,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 string filename = Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName);
                 string extension = Path.GetExtension(pROPERTY.ImageFile.FileName);
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                pROPERTY.Avatar = "~/Images/" + filename;
+                pROPERTY.Avatar =  filename;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
                 // Avatar
 

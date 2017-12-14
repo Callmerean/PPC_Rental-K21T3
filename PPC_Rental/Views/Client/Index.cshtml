@@ -41,27 +41,14 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.PropertyName)
                             </td>
-                            @*<td>
-                                     <img src="/Images/@item.Images" width="100px" alt="Alternate Text" />
-                                </td>*@
                             <td>
                                 @{
 
                                     try
                                     {
-                                        @*if (item.Images == null)
-                                            {
-                                                <td><img src="~/Images/ImagesNull.png" width="100px"></td>
-                                            }
-                                            else
-                                            {*@
+                                           
                                         <img src="~/Images/@item.Avatar" width="150px">
-                                        //}
-                                        //}
-                                        //else
-                                        //{
-                                        // <td><img src="/Images/@item.Images" width="100px"></td>
-                                        //}
+                                      
 
                                     }
                                     catch (Exception ex)
@@ -101,24 +88,8 @@
                             </th>
                            
                             <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-success">
-                                        <i class="ace-icon fa fa-check bigger-120"></i>
-                                    </button>
-
-                                    <button class="btn btn-xs btn-info">
-                                        <a href="~/Admin/Client/Edit/@item.ID"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
-                                    </button>
-
-                                    <button class="btn btn-xs btn-danger">
-                                        <a href="~/Admin/Client/Delete/@item.ID"> <i class="ace-icon fa fa-trash-o bigger-120"></i></a>
-                                    </button>
-
-                                    @*<button class="btn btn-xs btn-warning">
-                                            <i class="ace-icon fa fa-flag bigger-120"></i>
-                                        </button>*@
-                                </div>
-
+                               @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                             </td>
                         </tr>
                                     }

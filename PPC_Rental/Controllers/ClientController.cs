@@ -106,18 +106,20 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 {
                     string s2 = "~/Images/ImagesNull.png";
                     pROPERTY.ImageFile.SaveAs(s2);
-                    //property.ImageFile2.SaveAs(filename2);
+                    
                 }
                 else
                 {
-                    //property.ImageFile2.SaveAs(filename2);
+                   
                     pROPERTY.ImageFile.SaveAs(filename);
                 }
 
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
                 pROPERTY.UserID = (int)Session["UserID"];
-                pROPERTY.Status_ID = 1;
-                // TODO: Add insert logic here
+                pROPERTY.Status_ID = 3;
+                pROPERTY.Sale_ID = 1;
+             
+               
                 if (ModelState.IsValid)
                 {
                     var model = new DAO();
@@ -137,7 +139,8 @@ namespace PPC_Rental.Areas.Admin.Controllers
             {
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
                 pROPERTY.UserID = (int)Session["UserID"];
-                pROPERTY.Status_ID = 1;
+                pROPERTY.Status_ID = 3;
+             
                 if (ModelState.IsValid)
                 {
 
@@ -152,6 +155,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                         ModelState.AddModelError("", "Update không thành công");
                     }
                 }
+
             }
 
             db.SaveChanges();
@@ -173,7 +177,6 @@ namespace PPC_Rental.Areas.Admin.Controllers
         {
 
             ListItem();
-            // Images
             try
             {
 
@@ -198,6 +201,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 property.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
                 property.UserID = (int)Session["UserID"];
                 property.Status_ID = 1;
+                property.Sale_ID = 1;
 
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
