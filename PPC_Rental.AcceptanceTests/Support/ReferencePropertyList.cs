@@ -10,8 +10,9 @@ namespace PPC_Rental.AcceptanceTests.Support
 {
     public class ReferencePropertyList: Dictionary<string, PROPERTY>
     {
-        public PROPERTY GetById(string PropertyId) 
-            => this[PropertyId.Trim()].Should().NotBeNull()
+        public PROPERTY GetById(string PropertyId) {
+            return this[PropertyId.Trim()].Should().NotBeNull()
                                       .And.Subject.Should().BeOfType<PROPERTY>().Which;
+        }
     }
 }

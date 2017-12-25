@@ -8,7 +8,7 @@ using PPC_Rental.AcceptanceTests.Drivers.Search;
 
 namespace PPC_Rental.AcceptanceTests.StepDefinitions
 {
-    [Binding, Scope(Tag = "automated")]
+    [Binding,Scope(Tag = "automated")]
     public class UC01_FilterProjectStep
     {
         private readonly SearchDriver _searchDriver;
@@ -35,10 +35,9 @@ namespace PPC_Rental.AcceptanceTests.StepDefinitions
             _searchDriver.ShowProperty(expectedTitles);
         }
 
-   
+       
 
-
-
-}
+        
+    }
 
 }

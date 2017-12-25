@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC_Rental", "PPC_Rental\PPC_Rental.csproj", "{D71C6A9F-C972-4083-A3C9-7646AF67E924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC_Rental.AcceptanceTests", "PPC_Rental.AcceptanceTests\PPC_Rental.AcceptanceTests.csproj", "{D952421D-BFF0-4E82-A5A4-79193C334B16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC_Rental.AcceptanceTests", "PPC_Rental.AcceptanceTests\PPC_Rental.AcceptanceTests.csproj", "{10D1893E-BCB7-4761-AF7F-4F856FA91CCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC_Rental.AcceptanceTests.Common", "PPC_Rental.AcceptanceTests.Common\PPC_Rental.AcceptanceTests.Common.csproj", "{7E7906BC-9F20-4C26-A257-7EC81FCB6DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC_Rental.UITests.Selenium", "PPC_Rental.UITests.Selenium\PPC_Rental.UITests.Selenium.csproj", "{161D5C08-F7A0-4609-9B35-4F5CBCC7B42A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPC_Rental.UnitTests", "PPC_Rental.UnitTests\PPC_Rental.UnitTests.csproj", "{4D21E21F-9FDC-4675-BF28-3807F9190781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +23,22 @@ Global
 		{D71C6A9F-C972-4083-A3C9-7646AF67E924}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D71C6A9F-C972-4083-A3C9-7646AF67E924}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D71C6A9F-C972-4083-A3C9-7646AF67E924}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D952421D-BFF0-4E82-A5A4-79193C334B16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D952421D-BFF0-4E82-A5A4-79193C334B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D952421D-BFF0-4E82-A5A4-79193C334B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D952421D-BFF0-4E82-A5A4-79193C334B16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D1893E-BCB7-4761-AF7F-4F856FA91CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D1893E-BCB7-4761-AF7F-4F856FA91CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D1893E-BCB7-4761-AF7F-4F856FA91CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D1893E-BCB7-4761-AF7F-4F856FA91CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E7906BC-9F20-4C26-A257-7EC81FCB6DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E7906BC-9F20-4C26-A257-7EC81FCB6DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E7906BC-9F20-4C26-A257-7EC81FCB6DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E7906BC-9F20-4C26-A257-7EC81FCB6DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161D5C08-F7A0-4609-9B35-4F5CBCC7B42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161D5C08-F7A0-4609-9B35-4F5CBCC7B42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161D5C08-F7A0-4609-9B35-4F5CBCC7B42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161D5C08-F7A0-4609-9B35-4F5CBCC7B42A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D21E21F-9FDC-4675-BF28-3807F9190781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D21E21F-9FDC-4675-BF28-3807F9190781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D21E21F-9FDC-4675-BF28-3807F9190781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D21E21F-9FDC-4675-BF28-3807F9190781}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

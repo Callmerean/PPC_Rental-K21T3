@@ -14,12 +14,12 @@ namespace PPC_Rental.UITests.Selenium.Support
 
         public string BaseUrl
         {
-            get { return ConfigurationManager.AppSettings["BaseUrl"]; }
+            get { return ConfigurationManager.AppSettings["http://localhost:4675/"]; }
         }
 
         public void Start()
         {
-            if (!(Browser is null))
+            if (!(Browser == null))
             {
                 return;
             }
@@ -34,7 +34,7 @@ namespace PPC_Rental.UITests.Selenium.Support
 
         public void Stop()
         {
-            if (Browser is null)
+            if (Browser == null)
             {
                 return;
             }
@@ -54,7 +54,7 @@ namespace PPC_Rental.UITests.Selenium.Support
             Trace("Selenium stopped");
         }
 
-        private static void Trace(string message) => Console.WriteLine($"-> {message}");
+        private static void Trace(string message) { Console.WriteLine("-> {}", message); }
 
         private void StartIisExpress()
         {

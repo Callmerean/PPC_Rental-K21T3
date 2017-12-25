@@ -15,7 +15,7 @@ namespace PPC.AcceptanceTests.Support
                 //db.Orders.RemoveRange(db.Orders);
                 db.PROPERTY_FEATURE.RemoveRange(db.PROPERTY_FEATURE);
                 db.PROPERTies.RemoveRange(db.PROPERTies);
-                
+              
                 db.SaveChanges();
             }
         }

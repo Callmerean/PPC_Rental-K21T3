@@ -28,22 +28,21 @@ namespace PPC_Rental.AcceptanceTests.Drivers
         {
             using (var db = new DemoPPCRentalEntities1())
             {
-                //jj
                 foreach (var row in givenProjects.Rows)
                 {
                     var property = new PROPERTY
                     {
                         PropertyName = row["PropertyName"],
                         PropertyType_ID = db.PROPERTY_TYPE.ToList().FirstOrDefault(x=>x.CodeType==row["PropertyType"]).ID,
-                        Status_ID = db.PROJECT_STATUS.ToList().FirstOrDefault(x => x.Status_Name == row["Status"]).ID,
+                        //Status_ID = db.PROJECT_STATUS.ToList().FirstOrDefault(x => x.Status_Name == row["Status"]).ID,
                         District_ID = db.DISTRICTs.ToList().FirstOrDefault(x => x.DistrictName == row["District"]).ID,
-                        Street_ID = db.STREETs.ToList().FirstOrDefault(x => x.StreetName == row["Street"]).ID,
-                        Content = row["Content"],
-                        UserID = db.USERs.ToList().FirstOrDefault(x => x.FullName == row["Agency"]).ID,
-                        Sale_ID = db.USERs.ToList().FirstOrDefault(x => x.FullName == row["Sale"]).ID,
+                      //  Street_ID = db.STREETs.ToList().FirstOrDefault(x => x.StreetName == row["Street"]).ID,
+                       // Content = row["Content"],
+                        //UserID = db.USERs.ToList().FirstOrDefault(x => x.FullName == row["Agency"]).ID,
+                        //Sale_ID = db.USERs.ToList().FirstOrDefault(x => x.FullName == row["Sale"]).ID,
                         Price = int.Parse(row["Price"]),
                         BedRoom =int.Parse(row["BedRoom"]),
-                        BathRoom = int.Parse(row["BathRoom"])S
+                        BathRoom = int.Parse(row["BathRoom"])
 
                     };
 

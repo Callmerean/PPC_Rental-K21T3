@@ -31,31 +31,14 @@ namespace PPC_Rental.AcceptanceTests.Drivers.PropertyDetails
                     var property = new PROPERTY
                     {
                         PropertyName = row["PropertyName"],
-                        Avatar = row["Avatar"],
-                        Images = row["Images"],
-                        Content = row["Content"],
-                        PropertyType_ID = db.PROPERTY_TYPE.ToList().FirstOrDefault(d => d.CodeType == row["PropertyType"]).ID,
-                        Street_ID = db.STREETs.ToList().FirstOrDefault(x => x.StreetName == row["Street"]).ID,
-                        Ward_ID = db.WARDs.ToList().FirstOrDefault(x => x.WardName ==row["Ward"]).ID,
-                        District_ID = db.DISTRICTs.ToList().FirstOrDefault(x => x.DistrictName == row["District"]).ID,
-                        Price = int.Parse(row["Price"]),
-                        UnitPrice = row["UnitPrice"],
                         Area = row["Area"],
-                        BedRoom = int.Parse(row["BedRoom"]),
-                        BathRoom = int.Parse(row["BathRoom"]),
-                        PackingPlace = int.Parse(row["ParkingPlace"]),
-                        UserID = db.USERs.ToList().FirstOrDefault(x => x.Email == row["Email"]).ID,
-                        Created_at = DateTime.Parse(row["Created_at"]),
-                        Create_post = DateTime.Parse(row["Created_post"]),
-                        Status_ID = db.PROJECT_STATUS.ToList().FirstOrDefault(x => x.Status_Name == row["Status"]).ID,
-                        Note = row["Note"],
-                        Updated_at = DateTime.Parse(row["Update_at"]),
-                        Sale_ID = int.Parse(row["Sale_ID"])
-                           
+                        Price = Properties.Header.Contains("Price")
+                            ? Convert.ToInt32(row["Price"])
+                            : PropertyDefaultPrice
                     };
 
                     _context.ReferenceProperties.Add(
-                            Properties.Header.Contains("Id") ? row["Id"] :property.PropertyName ,
+                            Properties.Header.Contains("ID") ? row["ID"] : property.Area,
                             property);
 
                     db.PROPERTies.Add(property);
@@ -75,8 +58,9 @@ namespace PPC_Rental.AcceptanceTests.Drivers.PropertyDetails
 
             //Assert
             actualPropertyDetails.Should().Match<PROPERTY>(
-                b => b.PropertyName == expectedPropertyDetails["PropertyName"]);
-                
+                b => b.Area == expectedPropertyDetails["Area"]
+                && b.PropertyName == expectedPropertyDetails["PropertyName"]
+                && b.Price == int.Parse(expectedPropertyDetails["Price"]));
         }
 
         public void OpenpropertyDetails(string propertyId)

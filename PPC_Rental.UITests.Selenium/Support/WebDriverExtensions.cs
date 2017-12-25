@@ -79,7 +79,7 @@ namespace PPC_Rental.UITests.Selenium.Support
 
         public static void NavigateTo(this IWebDriver browser, string relativeUrl)
         {
-            browser.Navigate().GoToUrl(new Uri(new Uri(ConfigurationManager.AppSettings["BaseUrl"]), relativeUrl));
+            browser.Navigate().GoToUrl(new Uri(new Uri(ConfigurationManager.AppSettings["http://localhost:4675/"]), relativeUrl));
         }
 
         public static DropDown GetDropDown(this IWebDriver browser, string id)
@@ -110,7 +110,7 @@ namespace PPC_Rental.UITests.Selenium.Support
                 {
                     var selectedOption = _dropDown.FindElements(By.TagName("option")).FirstOrDefault(e => e.Selected);
 
-                    return selectedOption?.GetAttribute("value");
+                    return selectedOption != null ? selectedOption.GetAttribute("value") : null;
 
                 }
                 set

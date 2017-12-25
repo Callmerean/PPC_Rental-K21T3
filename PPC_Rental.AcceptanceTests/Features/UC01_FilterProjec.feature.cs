@@ -17,57 +17,40 @@ namespace PPC_Rental.AcceptanceTests.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class US04_PropertyDetailsFeature
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("UC1_Filter")]
+    [NUnit.Framework.CategoryAttribute("automated")]
+    public partial class UC1_FilterFeature
     {
         
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
-        
-#line 1 "US01_ViewDetails.feature"
+#line 1 "UC01_FilterProjec.feature"
 #line hidden
         
-        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
+        [NUnit.Framework.OneTimeSetUpAttribute()]
+        public virtual void FeatureSetup()
         {
-            get
-            {
-                return this._testContext;
-            }
-            set
-            {
-                this._testContext = value;
-            }
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
-        {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "US04 - property details", "\tAs a potential customer\r\n\tI want to see the details of a property\r\n\tSo that I ca" +
-                    "n better decide to buy it.", ProgrammingLanguage.CSharp, new string[] {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UC1_Filter", "\tIn order to search project\r\n\tAs a user of the website\r\n\tI want to search project" +
+                    "", ProgrammingLanguage.CSharp, new string[] {
                         "automated"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-        public static void FeatureTearDown()
+        [NUnit.Framework.OneTimeTearDownAttribute()]
+        public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
-            if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "US04 - property details")))
-            {
-                global::PPC_Rental.AcceptanceTests.Features.US04_PropertyDetailsFeature.FeatureSetup(null);
-            }
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -76,7 +59,6 @@ namespace PPC_Rental.AcceptanceTests.Features
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
-            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -86,11 +68,11 @@ namespace PPC_Rental.AcceptanceTests.Features
         
         public virtual void FeatureBackground()
         {
-#line 10
+#line 8
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "PropertyName",
-                        "Avatar",
+                        "Avarta",
                         "Images",
                         "PropertyType",
                         "Content",
@@ -102,38 +84,38 @@ namespace PPC_Rental.AcceptanceTests.Features
                         "Area",
                         "BedRoom",
                         "BathRoom",
-                        "ParkingPlace",
-                        "Email",
-                        "Created_at",
-                        "Created_post",
+                        "PackingPlace",
+                        "Agency",
+                        "Create_at",
+                        "Create_post",
                         "Status",
                         "Note",
                         "Update_at",
-                        "Sale_ID"});
+                        "Sale"});
             table1.AddRow(new string[] {
-                        "PIS Top Apartment",
+                        "Sunshine Ben Thanh",
                         "PIS_6656-Edit-stamp.jpg",
                         "a17584387317552326.jpg,AvatarNone17100766117552327.png,images1709523917552328.jpg" +
                             ",",
-                        "Apartment",
+                        "Office",
                         "The surrounding neighborhood is very much localized with a great number of local " +
                             "shops.",
-                        "Cô Bắc",
-                        "P.Cô Giang",
-                        "Q.1",
-                        "10000",
+                        "Thôn Chúc Đồng",
+                        "Đại Yên",
+                        "Chương Mỹ",
+                        "40000",
                         "VND",
                         "120m2",
-                        "3",
+                        "2",
                         "2",
                         "1",
-                        "lythihuyenchau@gmail.com",
+                        "Ly Chau",
                         "2017-11-09",
                         "2017-11-09",
-                        "Ðã duy?t",
+                        "Đã duyệt",
                         "Done",
                         "2017-11-23",
-                        "2"});
+                        "Ly Chau"});
             table1.AddRow(new string[] {
                         "ViLa Q7",
                         "images172300301.jpg",
@@ -141,22 +123,22 @@ namespace PPC_Rental.AcceptanceTests.Features
                         "Villa",
                         "Brand new apartments with unbelievable river and city view, completely renovated " +
                             "and tastefully furnished.",
-                        "Nguyễn Thị Thập",
-                        "P.Phú Mỹ",
-                        "Q.7",
+                        "Số 39",
+                        "TT Xuân Mai",
+                        "Chương Mỹ",
                         "70000",
                         "VND",
                         "120m2",
                         "3",
                         "4",
                         "1",
-                        "lythihuyenchau@gmail.com",
+                        "Ly Chau",
                         "2017-11-09",
                         "2017-11-09",
-                        "Ðã duy?t",
+                        "Đã duyệt",
                         "Done",
                         "2017-11-23",
-                        "2"});
+                        "Ly Chau"});
             table1.AddRow(new string[] {
                         "PIS Serviced Apartment – Style",
                         "sunshine-benthanh-cityhome-10-stamp174228283.jpg",
@@ -164,22 +146,22 @@ namespace PPC_Rental.AcceptanceTests.Features
                         "Office",
                         "The well equipped kitchen is opened on a cozy living room and a dining area with " +
                             "table and chairs..",
-                        "Bến Vân Ðồn",
-                        "P.03",
-                        "Q.4",
+                        "Thôn Chúc Đồng",
+                        "Đại Yên",
+                        "Chương Mỹ",
                         "30000",
                         "VND",
                         "130m2",
                         "2",
                         "3",
                         "1",
-                        "lythihuyenchau@gmail.com",
+                        "Ly Chau",
                         "2017-11-09",
                         "2017-11-09",
-                        "Ðã duy?t",
+                        "Đã duyệt",
                         "Done",
                         "2017-11-23",
-                        "3"});
+                        "Ly Chau"});
             table1.AddRow(new string[] {
                         "Vinhomes Central Park L2 – Duong’s Apartment",
                         "PIS_7389-Edit-stamp.jpg",
@@ -187,22 +169,22 @@ namespace PPC_Rental.AcceptanceTests.Features
                         "Villa",
                         "Vinhomes Central Park is a new development that is in the heart of everything tha" +
                             "t Ho Chi Minh has to offer.",
-                        "Bà Hạt",
-                        "P.02",
-                        "Q.10",
+                        "Số 39",
+                        "TT Xuân Mai",
+                        "Chương Mỹ",
                         "110000",
                         "VND",
                         "150m2",
                         "4",
                         "2",
                         "1",
-                        "lythihuyenchau@gmail.com",
+                        "Ly Chau",
                         "2017-11-09",
                         "2017-11-09",
-                        "Ðã duy?t",
+                        "Đã duyệt",
                         "Done",
                         "2017-11-23",
-                        "3"});
+                        "Ly Chau"});
             table1.AddRow(new string[] {
                         "Saigon Pearl Ruby Block",
                         "PIS_7319-Edit-stamp.jpg",
@@ -210,47 +192,40 @@ namespace PPC_Rental.AcceptanceTests.Features
                         "Apartment",
                         "Studio apartment at central of CBD, nearby Ben Thanh market, Bui Vien Backpacker " +
                             "Area, 23/9 park…",
-                        "Chu Văn An",
-                        "P.Long Bình",
-                        "Q.9",
+                        "Thôn Chúc Đồng",
+                        "Đại Yên",
+                        "Chương Mỹ",
                         "30000",
                         "VND",
                         "130m2",
                         "3",
                         "5",
                         "1",
-                        "lythihuyenchau@gmail.com",
+                        "Ly Chau",
                         "2017-11-09",
                         "2017-11-09",
-                        "Ðã duy?t",
+                        "Đã duyệt",
                         "Done",
                         "2017-11-23",
-                        "2"});
-#line 11
+                        "Ly Chau"});
+#line 9
  testRunner.Given("the following project", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("The property detail be show")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "US04 - property details")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("automated")]
-        public virtual void ThePropertyDetailBeShow()
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Filter Project")]
+        public virtual void FilterProject()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The property detail be show", ((string[])(null)));
-#line 19
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filter Project", ((string[])(null)));
+#line 17
 this.ScenarioSetup(scenarioInfo);
-#line 10
+#line 8
 this.FeatureBackground();
-#line 20
- testRunner.When("I click the details of \'PIS Top Apartment\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "PropertyName"});
-            table2.AddRow(new string[] {
-                        "PIS Top Apartment"});
-#line 21
- testRunner.Then("the property details should showed", ((string)(null)), table2, "Then ");
+#line 18
+ testRunner.When("I search for projects by the phrase \'Chương Mỹ\',\'Office\',\'2\',\'2\',\'30000-60000\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 19
+ testRunner.Then("project should display project with projectname follow \'Sunshine Ben Thanh\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
