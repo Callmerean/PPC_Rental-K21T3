@@ -28,6 +28,7 @@ namespace PPC_Rental.AcceptanceTests.Drivers
         {
             using (var db = new DemoPPCRentalEntities1())
             {
+                //jj
                 foreach (var row in givenProjects.Rows)
                 {
                     var property = new PROPERTY
