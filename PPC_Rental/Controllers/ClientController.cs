@@ -104,9 +104,6 @@ namespace PPC_Rental.Areas.Admin.Controllers
             }
             return RedirectToAction("Index","Home");
         }
-
-
-
         public ActionResult Create()
         {
             ListItem();
