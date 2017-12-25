@@ -25,41 +25,57 @@
 
         <!-- PROPERTY FILTERS -->
         <div class="row">
-            <div class="col-md-12">
-                <div class="property-filter">
-                    <a href="#" class="active">Overview</a>
-                    <a href="#">Living Room</a>
-                    <a href="#">I Bedroom</a>
-                    <a href="#">II Bedroom</a>
-                    <a href="#">Bathroom</a>
-                    <a href="#">Kitchen</a>
-                    <a href="#" class="view-map">View on Map</a>
-                </div>
-            </div>
+         
         </div>
         <!-- PROPERTY FILTERS -->
 
         <div class="row">
+            
+            @{if (Model.Images != null)
+                {
+                    string[] arr = Model.Images.Split(',');
 
+                    <div class="col-md-7 property-slider">
+                        <figure id="property-slider">
+                            <ul class="slides">
+                                <li><img src="~/Images/@Model.Avatar" alt="Image" class="img-responsive"></li>
+                                @foreach (var item in arr)
+                                {
+                                    <li><img src="~/MultipleImages/@item" alt="Image" class="img-responsive"></li>
+                                }
+                            </ul>
+                            <span class="label sale">Sale</span>
+                        </figure>
+                        <figure id="property-carousel" class="flexslider">
+                            <ul class="slides">
+                                <li><img src="/Images/@Model.Avatar" alt="Thumbnails" class="img-responsive"></li>
+                                @foreach (var item in arr)
+                                {
+                                    <li><img src="~/MultipleImages/@item" alt="Thumbnails" class="img-responsive"></li>
+                                }
+                            </ul>
+                        </figure>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-7 property-slider">
+                        <figure id="property-slider">
+                            <ul class="slides">
+                                <li><img src="~/Images/@Model.Avatar" alt="Image" class="img-responsive"></li>
+                            </ul>
+                            <span class="label sale">Sale</span>
+                        </figure>
+                        <figure id="property-carousel" class="flexslider">
+                            <ul class="slides">
+                                <li><img src="/Images/@Model.Avatar" alt="Thumbnails" class="img-responsive"></li>
+                            </ul>
+                        </figure>
+                    </div>
+                }
+            }
             <!-- PROPERTY SLIDER -->
-            <div class="col-md-7 property-slider">
-                <figure id="property-slider">
-                    <ul class="slides">
-                        <li><img src="/Images/@Model.Avatar" alt="Image" class="img-responsive"></li>
-                    </ul>
-                    <span class="label sale">Sale</span>
-                </figure>
-                <figure id="property-carousel" class="flexslider">
-                    <ul class="slides">
-                        <li><img src="/Images/@Model.Avatar" alt="Thumbnails" class="img-responsive"></li>
-                        <li><img src="/Content/Hata/images/pro-thumb2.jpg" alt="Thumbnails" class="img-responsive"></li>
-                        <li><img src="/Content/Hata/images/pro-thumb3.jpg" alt="Thumbnails" class="img-responsive"></li>
-                        <li><img src="/Content/Hata/images/pro-thumb1.jpg" alt="Thumbnails" class="img-responsive"></li>
-                        <li><img src="/Content/Hata/images/pro-thumb2.jpg" alt="Thumbnails" class="img-responsive"></li>
-                        <li><img src="/Content/Hata/images/pro-thumb3.jpg" alt="Thumbnails" class="img-responsive"></li>
-                    </ul>
-                </figure>
-            </div>
+           
             <!-- PROPERTY SLIDER -->
             <!-- PROPERTY DATA -->
             <div class="col-md-5 property-data">
@@ -69,7 +85,7 @@
                 </div>
                 <div class="prop-price">
                     <strong class="price">$ @Model.Price</strong>
-                    <a href="#" class="btn btn-danger">Contact Agent</a>
+                    
                 </div>
                 <div class="prop-features">
                     <span class="bed">@Model.BedRoom Bedroom</span>
@@ -79,16 +95,24 @@
                     <span class="gym">1 Gym</span>
                 </div>
                 <ul>
-                    <li>Garden</li>
-                    <li>Air Condition</li>
-                    <li>CCTV</li>
-                    <li>Security System</li>
-                    <li>Parking</li>
-                    <li>Children Play Ground</li>
-                    <li>Graveyard</li>
-                    <li>Gym</li>
-                    <li>Community Center</li>
-                </ul>
+                                        @foreach (var item in Model.PROPERTY_FEATURE)
+                                        {
+                                            if (item.Property_ID == Model.ID)
+                                            {
+                                                <li>
+                                                    @item.FEATURE.FeatureName</li>
+                                             }
+                                          }
+                                                    @*<li>Garden</li>
+                                        <li>Air Condition</li>
+                                        <li>CCTV</li>
+                                        <li>Security System</li>
+                                        <li>Parking</li>
+                                        <li>Children Play Ground</li>
+                                        <li>Graveyard</li>
+                                        <li>Gym</li>
+                                        <li>Community Center</li>*@
+</ul>
             </div>
             <!-- PROPERTY DATA -->
 
@@ -124,87 +148,19 @@
         </div>
     </div>
     <!-- GALLERY -->
-
-    <div class="container">
-        <div class="row">
-
-            <!-- INFRASTRUCTURE -->
-            <div class="col-md-5 infra-elements">
-                <h5>Infrastructure Elements</h5>
-                <div class="element">
-                    <img src="/Content/Hata/images/element-bus.png" alt="">
-                    <h6>Bus Stop</h6>
-                    <span class="walk">In 8 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-                <div class="element">
-                    <img src="/Content/Hata/images/element-book.png" alt="">
-                    <h6>The Great Library</h6>
-                    <span class="walk">In 12 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-                <div class="element">
-                    <img src="/Content/Hata/images/element-market.png" alt="">
-                    <h6>Super Market</h6>
-                    <span class="walk">In 2 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-                <div class="element">
-                    <img src="/Content/Hata/images/element-school.png" alt="">
-                    <h6>International School</h6>
-                    <span class="cycling">In 13 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-            </div>
-            <!-- INFRASTRUCTURE -->
-            <!-- NEARBY PLACES -->
-            <div class="col-md-7 nearby-places">
-                <h5>Nearby Attractions</h5>
-                <div class="element">
-                    <figure>
-                        <img src="/Content/Hata/images/nearby1.png" alt="Image" class="img-responsive">
-                    </figure>
-                    <h6>Champs Elysees</h6>
-                    <span class="car">In 14 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-                <div class="element">
-                    <figure>
-                        <img src="/Content/Hata/images/nearby2.png" alt="Image" class="img-responsive">
-                    </figure>
-                    <h6>South Beach</h6>
-                    <span class="car">In 20 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-                <div class="element">
-                    <figure>
-                        <img src="/Content/Hata/images/nearby3.png" alt="Image" class="img-responsive">
-                    </figure>
-                    <h6>Ghosts and The Walking</h6>
-                    <span class="car">In 24 Minutes</span>
-                    <a href="#" class="loc-marker"><i class="fa fa-map-marker"></i></a>
-                </div>
-            </div>
-            <!-- NEARBY PLACES -->
-
-        </div>
-    </div>
-
     <!-- BANNER -->
     <div class="full-width personal-agent">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-4">
                     <figure>
-                        <img src="images/agent-pic.png" alt="Pic" class="img-responsive">
+                        <img src="/Content/Hata/images/agent-pic.png" alt="Pic" class="img-responsive">
                     </figure>
                 </div>
                 <div class="col-md-8 col-sm-8">
                     <article>
-                        <span>Lara Loft</span>
-                        <h2>Your personal agent</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget<br> dolor. Aenean massa.</p>
-                        <button type="button" class="btn btn-danger">Get Agent Help</button>
+                        <h2>CONTENT</h2>
+                        <p>@Model.Content</p>
                     </article>
                 </div>
             </div>

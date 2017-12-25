@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<PPC_Rental.Models.NEWS>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+			<!-- BLOG POSTS -->
+<div class="container blog-posts">
+    <!-- BREADCRUMBS-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumbs">
+                    <a href="~/Home/Index">Home</a>
+                    <span class="sep">/</span>
+                    <span class="current">Blog</span>
+                </div>
+                <h2 class="page-title">Blog</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- BREADCRUMBS -->
+    <div class="row">
+@foreach (var item in Model)
+{
+        <div class="col-md-6">
+            <div class="post clearfix">
+                <figure>
+                    <a href="~/News/DetailNews/@item.ID"><img src="/Content/Hata/images/@item.NewImages" alt="" class="img-responsive"></a>
+                </figure>
+                <article>
+                    <span class="date">@item.Create_at</span>
+                    <h3><a href="~/News/DetailNews/@item.ID">@item.Head</a></h3>
+                    <p>@item.ShortDescription</p>
+                    
+                </article>
+            </div>
+        </div>
+}
+</div>
+<!-- BLOG POSTS -->
+<!-- PAGINATION -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pagination">
+                @*<a href="#" class="prev"><i class="fa fa-angle-left"></i>Previous</a>
+                <span>1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#" class="next">Next<i class="fa fa-angle-right"></i></a>*@
+                 @Html.PagedListPager(Model, page => Url.Action("News", new { page, @class= "pagination span" }))
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGINATION -->
+
+<!-- CALL2ACTION -->
+<div class="full-width call-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h4>Want to sell you property? contact us now!</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="contact.html" class="btn btn-danger">Submit Property</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CALL2ACTION -->
+
+
+</div>

@@ -9,36 +9,121 @@
 <!-- SLIDER -->
 <div class="flexslider" id="slider">
     <ul class="slides">
-        @foreach (var item in Model)
-        {
-            if (item.ID <= 10)
-            {
-            <li>
-                <img src="/Content/Hata/images/@item.Images" class="img-responsive" alt="Slider Image" />
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="detail">
-                                <div class="white">
-                                    <h2>@item.PropertyName.Substring(0, item.PropertyName.Length - 10)</h2>
-                                    <span class="slide-location">@item.WARD.WardName, @item.DISTRICT.DistrictName</span>
-                                    <div class="bar"></div>
-                                    <span class="slide-price">$ @item.Price</span>
-                                </div>
-                                <div class="red">
-                                    <span class="bath">@item.BathRoom Bathrooms</span>
-                                    <span class="bed">@item.BedRoom Bedrooms</span>
-                                    <span class="gym">@item.PackingPlace Garage</span>
-                                    
-                                </div>
+        <li>
+            <img src="/Content/Hata/images/slider.jpg" class="img-responsive" alt="Slider Image" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="detail">
+                            <div class="white">
+                                <h2>Villa<br>Ember</h2>
+                                <span class="slide-location">Phu My Hung, HCMC</span>
+                                <div class="bar"></div>
+                                <span class="slide-price">$ 1 000 000</span>
+                            </div>
+                            <div class="red">
+                                <span class="bath">3 Bathroom</span>
+                                <span class="bed">2 Bedrooms</span>
+                                <span class="gym">1 Gym</span>
+                                <span class="pool">2 Pool</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            }
-
-        }
+            </div>
+        </li>
+        <li>
+            <img src="~/Content/Hata/images/slider-2.jpg" class="img-responsive" alt="Slider Image" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="detail">
+                            <div class="white">
+                                <h2>House<br>with Ghosts</h2>
+                                <span class="slide-location">South Hotel, HCMC</span>
+                                <div class="bar"></div>
+                                <span class="slide-price">$ 900 000</span>
+                            </div>
+                            <div class="red">
+                                <span class="bath">3 Bathroom</span>
+                                <span class="bed">2 Bedrooms</span>
+                                <span class="gym">1 Gym</span>
+                                <span class="pool">2 Pool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <img src="~/Content/Hata/images/slider-3.jpg" class="img-responsive" alt="Slider Image" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="detail">
+                            <div class="white">
+                                <h2>House<br>with Ghosts</h2>
+                                <span class="slide-location">South Beach, Miami (USA)</span>
+                                <div class="bar"></div>
+                                <span class="slide-price">$ 1 525 000</span>
+                            </div>
+                            <div class="red">
+                                <span class="bath">3 Bathroom</span>
+                                <span class="bed">2 Bedrooms</span>
+                                <span class="gym">1 Gym</span>
+                                <span class="pool">2 Pool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <img src="~/Content/Hata/images/slider-4.jpg" class="img-responsive" alt="Slider Image" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="detail">
+                            <div class="white">
+                                <h2>House<br>with Ghosts</h2>
+                                <span class="slide-location">South Beach, Miami (USA)</span>
+                                <div class="bar"></div>
+                                <span class="slide-price">$ 1 525 000</span>
+                            </div>
+                            <div class="red">
+                                <span class="bath">3 Bathroom</span>
+                                <span class="bed">2 Bedrooms</span>
+                                <span class="gym">1 Gym</span>
+                                <span class="pool">2 Pool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <img src="~/Content/Hata/images/slider-5.jpg" class="img-responsive" alt="Slider Image" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="detail">
+                            <div class="white">
+                                <h2>House<br>with Ghosts</h2>
+                                <span class="slide-location">South Beach, Miami (USA)</span>
+                                <div class="bar"></div>
+                                <span class="slide-price">$ 1 525 000</span>
+                            </div>
+                            <div class="red">
+                                <span class="bath">3 Bathroom</span>
+                                <span class="bed">2 Bedrooms</span>
+                                <span class="gym">1 Gym</span>
+                                <span class="pool">2 Pool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
     </ul>
 </div>
 <!-- SLIDER -->
@@ -47,7 +132,7 @@
     <div class="container">
         <div class="filter">
 
-            @Html.DropDownList("dis", Quans, "Location", new { @class= "location", @id = "dis" })
+            @Html.DropDownList("dis", Quans, "Location", htmlAttributes: new { @class= "location", @id = "dis" })
            @Html.DropDownList("propertytype", Protyp, "Type", new { @class= "cata",@id = "type" })
             <select class="type" name="bed" id="bedRoom">
                 <option>Bedroom</option>

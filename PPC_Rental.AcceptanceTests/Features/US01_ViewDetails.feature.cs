@@ -90,77 +90,167 @@ namespace PPC_Rental.AcceptanceTests.Features
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "PropertyName",
+                        "Avatar",
+                        "Images",
+                        "PropertyType",
+                        "Content",
+                        "Street",
+                        "Ward",
+                        "District",
+                        "Price",
+                        "UnitPrice",
                         "Area",
-                        "Price"});
+                        "BedRoom",
+                        "BathRoom",
+                        "ParkingPlace",
+                        "Email",
+                        "Created_at",
+                        "Created_post",
+                        "Status",
+                        "Note",
+                        "Update_at",
+                        "Sale_ID"});
             table1.AddRow(new string[] {
                         "PIS Top Apartment",
+                        "PIS_6656-Edit-stamp.jpg",
+                        "a17584387317552326.jpg,AvatarNone17100766117552327.png,images1709523917552328.jpg" +
+                            ",",
+                        "Apartment",
+                        "The surrounding neighborhood is very much localized with a great number of local " +
+                            "shops.",
+                        "Cô Bắc",
+                        "P.Cô Giang",
+                        "Q.1",
+                        "10000",
+                        "VND",
                         "120m2",
-                        "10000"});
+                        "3",
+                        "2",
+                        "1",
+                        "lythihuyenchau@gmail.com",
+                        "2017-11-09",
+                        "2017-11-09",
+                        "Ðã duy?t",
+                        "Done",
+                        "2017-11-23",
+                        "2"});
             table1.AddRow(new string[] {
-                        "ICON 56 – Modern Style Apartment",
-                        "130m2",
-                        "30000"});
-            table1.AddRow(new string[] {
-                        "PIS Serviced Apartment – Boho Style",
+                        "ViLa Q7",
+                        "images172300301.jpg",
+                        "images172300301.jpg",
+                        "Villa",
+                        "Brand new apartments with unbelievable river and city view, completely renovated " +
+                            "and tastefully furnished.",
+                        "Nguyễn Thị Thập",
+                        "P.Phú Mỹ",
+                        "Q.7",
+                        "70000",
+                        "VND",
                         "120m2",
-                        "70000"});
+                        "3",
+                        "4",
+                        "1",
+                        "lythihuyenchau@gmail.com",
+                        "2017-11-09",
+                        "2017-11-09",
+                        "Ðã duy?t",
+                        "Done",
+                        "2017-11-23",
+                        "2"});
             table1.AddRow(new string[] {
-                        "Bigroom with Riverview",
-                        "200m2",
-                        "90000"});
-            table1.AddRow(new string[] {
-                        "PIS Serviced Apartment – Style 3",
+                        "PIS Serviced Apartment – Style",
+                        "sunshine-benthanh-cityhome-10-stamp174228283.jpg",
+                        "a - Copy17095239.jpg,images (1) - Copy17095242.jpg,images17095242.jpg,",
+                        "Office",
+                        "The well equipped kitchen is opened on a cozy living room and a dining area with " +
+                            "table and chairs..",
+                        "Bến Vân Ðồn",
+                        "P.03",
+                        "Q.4",
+                        "30000",
+                        "VND",
                         "130m2",
-                        "30000"});
+                        "2",
+                        "3",
+                        "1",
+                        "lythihuyenchau@gmail.com",
+                        "2017-11-09",
+                        "2017-11-09",
+                        "Ðã duy?t",
+                        "Done",
+                        "2017-11-23",
+                        "3"});
             table1.AddRow(new string[] {
                         "Vinhomes Central Park L2 – Duong’s Apartment",
+                        "PIS_7389-Edit-stamp.jpg",
+                        "images1702244617042862.jpg,",
+                        "Villa",
+                        "Vinhomes Central Park is a new development that is in the heart of everything tha" +
+                            "t Ho Chi Minh has to offer.",
+                        "Bà Hạt",
+                        "P.02",
+                        "Q.10",
+                        "110000",
+                        "VND",
                         "150m2",
-                        "110000"});
+                        "4",
+                        "2",
+                        "1",
+                        "lythihuyenchau@gmail.com",
+                        "2017-11-09",
+                        "2017-11-09",
+                        "Ðã duy?t",
+                        "Done",
+                        "2017-11-23",
+                        "3"});
             table1.AddRow(new string[] {
                         "Saigon Pearl Ruby Block",
+                        "PIS_7319-Edit-stamp.jpg",
+                        "images17423697317334243.jpg,PIS_4622-Edit17463610217334244.jpg,",
+                        "Apartment",
+                        "Studio apartment at central of CBD, nearby Ben Thanh market, Bui Vien Backpacker " +
+                            "Area, 23/9 park…",
+                        "Chu Văn An",
+                        "P.Long Bình",
+                        "Q.9",
+                        "30000",
+                        "VND",
                         "130m2",
-                        "30000"});
-            table1.AddRow(new string[] {
-                        "Nguyen Dinh Chinh – Duplex with Balcony",
-                        "120m2",
-                        "200000"});
-            table1.AddRow(new string[] {
-                        "Sunshine Ben Thanh",
-                        "130m2",
-                        "40000"});
-            table1.AddRow(new string[] {
-                        "Cosiana Apartment with Balcony",
-                        "500m2",
-                        "990000"});
+                        "3",
+                        "5",
+                        "1",
+                        "lythihuyenchau@gmail.com",
+                        "2017-11-09",
+                        "2017-11-09",
+                        "Ðã duy?t",
+                        "Done",
+                        "2017-11-23",
+                        "2"});
 #line 11
- testRunner.Given("the following propertys", ((string)(null)), table1, "Given ");
+ testRunner.Given("the following project", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("The property detail be showed")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("The property detail be show")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "US04 - property details")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("automated")]
-        public virtual void ThePropertyDetailBeShowed()
+        public virtual void ThePropertyDetailBeShow()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The property detail be showed", ((string[])(null)));
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The property detail be show", ((string[])(null)));
+#line 19
 this.ScenarioSetup(scenarioInfo);
 #line 10
 this.FeatureBackground();
-#line 26
- testRunner.When("I open the details of \'Analysis Patterns\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+ testRunner.When("I click the details of \'PIS Top Apartment\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "PropertyName",
-                        "Area",
-                        "Price"});
+                        "PropertyName"});
             table2.AddRow(new string[] {
-                        "Cosiana Apartment with Balcony",
-                        "500m2",
-                        "990000"});
-#line 27
- testRunner.Then("the property details should show", ((string)(null)), table2, "Then ");
+                        "PIS Top Apartment"});
+#line 21
+ testRunner.Then("the property details should showed", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

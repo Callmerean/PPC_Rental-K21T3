@@ -22,6 +22,7 @@ namespace PPC_Rental.Models
         }
         public long InsertProperty(PROPERTY entity)
         {
+            var property = db.PROPERTies.Find(entity.ID);
             db.PROPERTies.Add(entity);
             db.SaveChanges();
             return entity.ID;
@@ -32,44 +33,64 @@ namespace PPC_Rental.Models
         }
         public bool Update(PROPERTY entitys)
         {
-            try
-            {
                 var property = db.PROPERTies.Find(entitys.ID);
                 property.PropertyName = entitys.PropertyName;
-                property.Avatar = entitys.Avatar;
+               if(entitys.ImageFile == null)
+                {
+
+                }
+                else
+                {
+                    property.Avatar = entitys.Avatar;
+                }
+                if (entitys.ImageFile1 == null)
+                {
+
+                }
+                else
+                {
+                    property.Images = entitys.Images;
+                }
                 property.PropertyType_ID = entitys.PropertyType_ID;
                 property.Content = entitys.Content;
                 property.Street_ID = entitys.Street_ID;
                 property.Ward_ID = entitys.Ward_ID;
                 property.District_ID = entitys.District_ID;
                 property.Price = entitys.Price;
-                property.UnitPrice = entitys.UnitPrice;
                 property.Area = entitys.Area;
                 property.BedRoom = entitys.BedRoom;
                 property.BathRoom = entitys.BathRoom;
                 property.PackingPlace = entitys.PackingPlace;
-                property.UserID = entitys.UserID;
-                //property.Created_at = DateTime.Parse(DateTime.Now.ToString("yyyy-mm-dd"));
-                //property.Create_post = DateTime.Parse(DateTime.Now.ToString("yyyy-mm-dd"));
                 property.Status_ID = entitys.Status_ID;
+                if(entitys.Status_ID== 3)
+                {
+                property.Create_post = DateTime.Parse(DateTime.Now.ToShortDateString());
+                String.Format("{0:dd/MM/yyyy}", property.Updated_at);
+                }
+                else
+                {
+                    property.Create_post = null;
+                }
                 property.Note = entitys.Note;
-                //property.Updated_at = DateTime.Parse(DateTime.Now.ToString("yyyy-mm-dd"));
                 property.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                String.Format("{0:dd/MM/yyyy}", property.Updated_at);
                 property.Sale_ID = entitys.Sale_ID;
                 db.SaveChanges();
                 return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-
+          
 
         }
-        public IEnumerable<PROPERTY> ListAllPaging(int page, int pageSize)
+        public IEnumerable<PROPERTY> ListAllPaging(int page, int pageSize,int x1)
         {
-            return db.PROPERTies.OrderByDescending(x => x.PropertyName).ToPagedList(page, pageSize);
+            return db.PROPERTies.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<PROPERTY> UserListAllPaging(int page, int pageSize, int x1)
+        {
+            return db.PROPERTies.Where(x => x.UserID == x1).OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<NEWS> ListNewsPaging(int page,int pageSize)
+        {
+            return db.NEWS.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
        
 
@@ -114,5 +135,6 @@ namespace PPC_Rental.Models
         {
             return db.PROPERTies.Count(x => x.PropertyName == propertyname) > 0;
         }
+        
     }
 }

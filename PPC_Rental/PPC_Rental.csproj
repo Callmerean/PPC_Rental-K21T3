@@ -41,6 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BotDetect, Version=4.2.0.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.2.0\lib\net45\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.Mvc, Version=4.2.0.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.2.0\lib\net45\BotDetect.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -187,6 +193,10 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Common\CommonContants.cs" />
+    <Compile Include="Models\Common\Encryptor.cs" />
+    <Compile Include="Models\Common\UserLogin.cs" />
+    <Compile Include="Models\CPass.cs" />
     <Compile Include="Models\DAO.cs" />
     <Compile Include="Models\DISTRICT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -194,9 +204,10 @@
     <Compile Include="Models\FEATURE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FixBug\PostModel.cs" />
+    <Compile Include="Models\Common\PostModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,6 +239,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\STREET.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -543,6 +560,136 @@
     <Content Include="Content\Login\images\lolo.jpg" />
     <Content Include="Content\Login\images\overlay.png" />
     <Content Include="Content\Login\images\slider-4.jpg" />
+    <Content Include="Content\Mate\css\custom.css" />
+    <Content Include="Content\Mate\css\fontastic.css" />
+    <Content Include="Content\Mate\css\style.blue.css" />
+    <Content Include="Content\Mate\css\style.default.css" />
+    <Content Include="Content\Mate\css\style.green.css" />
+    <Content Include="Content\Mate\css\style.pink.css" />
+    <Content Include="Content\Mate\css\style.red.css" />
+    <Content Include="Content\Mate\css\style.sea.css" />
+    <Content Include="Content\Mate\css\style.violet.css" />
+    <Content Include="Content\Mate\fonts\dashboard.svg" />
+    <Content Include="Content\Mate\icons-reference\fonts\dashboard.svg" />
+    <Content Include="Content\Mate\icons-reference\icons-reference.html" />
+    <Content Include="Content\Mate\icons-reference\styles.css" />
+    <Content Include="Content\Mate\img\avatar-1.jpg" />
+    <Content Include="Content\Mate\img\avatar-2.jpg" />
+    <Content Include="Content\Mate\img\avatar-3.jpg" />
+    <Content Include="Content\Mate\img\avatar-4.jpg" />
+    <Content Include="Content\Mate\img\avatar-5.jpg" />
+    <Content Include="Content\Mate\img\avatar-6.jpg" />
+    <Content Include="Content\Mate\img\bg.jpg" />
+    <Content Include="Content\Mate\img\favicon.ico" />
+    <Content Include="Content\Mate\img\project-1.jpg" />
+    <Content Include="Content\Mate\img\project-2.jpg" />
+    <Content Include="Content\Mate\img\project-3.jpg" />
+    <Content Include="Content\Mate\img\project-4.jpg" />
+    <Content Include="Content\Mate\img\template-mac.png" />
+    <Content Include="Content\Mate\js\charts-custom.js" />
+    <Content Include="Content\Mate\js\charts-home.js" />
+    <Content Include="Content\Mate\js\front.js" />
+    <Content Include="Content\Mate\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\Mate\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\Mate\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\Mate\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\Mate\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\Mate\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\Mate\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\Mate\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\Mate\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Mate\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Mate\vendor\chart.js\Chart.bundle.js" />
+    <Content Include="Content\Mate\vendor\chart.js\Chart.bundle.min.js" />
+    <Content Include="Content\Mate\vendor\chart.js\Chart.js" />
+    <Content Include="Content\Mate\vendor\chart.js\Chart.min.js" />
+    <Content Include="Content\Mate\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\Mate\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\Mate\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Mate\vendor\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Content\Mate\vendor\jquery-validation\additional-methods.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\jquery.validate.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\jquery.validate.min.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ar.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_az.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_bg.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_bn_BD.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ca.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_cs.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_da.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_de.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_el.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_es.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_es_AR.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_es_PE.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_et.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_eu.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_fa.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_fi.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_fr.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ge.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_gl.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_he.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_hr.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_hu.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_hy_AM.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_id.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_is.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_it.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ja.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ka.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_kk.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ko.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_lt.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_lv.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_mk.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_my.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_nl.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_no.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_pl.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_pt_BR.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_pt_PT.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ro.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ru.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_sd.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_si.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_sk.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_sl.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_sr.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_sr_lat.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_sv.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_th.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_tj.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_tr.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_uk.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_ur.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_vi.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_zh.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\messages_zh_TW.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\methods_de.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\methods_es_CL.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\methods_fi.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\methods_nl.js" />
+    <Content Include="Content\Mate\vendor\jquery-validation\localization\methods_pt.js" />
+    <Content Include="Content\Mate\vendor\jquery.cookie\jquery.cookie.js" />
+    <Content Include="Content\Mate\vendor\jquery.cookie\MIT-LICENSE.txt" />
+    <Content Include="Content\Mate\vendor\jquery\core.js" />
+    <Content Include="Content\Mate\vendor\jquery\jquery.js" />
+    <Content Include="Content\Mate\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\Mate\vendor\jquery\jquery.slim.js" />
+    <Content Include="Content\Mate\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Mate\vendor\popper.js\esm\popper-utils.js" />
+    <Content Include="Content\Mate\vendor\popper.js\esm\popper-utils.min.js" />
+    <Content Include="Content\Mate\vendor\popper.js\esm\popper.js" />
+    <Content Include="Content\Mate\vendor\popper.js\esm\popper.min.js" />
+    <Content Include="Content\Mate\vendor\popper.js\popper-utils.js" />
+    <Content Include="Content\Mate\vendor\popper.js\popper-utils.min.js" />
+    <Content Include="Content\Mate\vendor\popper.js\popper.js" />
+    <Content Include="Content\Mate\vendor\popper.js\popper.min.js" />
+    <Content Include="Content\Mate\vendor\popper.js\umd\popper-utils.js" />
+    <Content Include="Content\Mate\vendor\popper.js\umd\popper-utils.min.js" />
+    <Content Include="Content\Mate\vendor\popper.js\umd\popper.js" />
+    <Content Include="Content\Mate\vendor\popper.js\umd\popper.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Sig\css\font-awesome.css" />
     <Content Include="Content\Sig\css\style.css" />
@@ -551,6 +698,12 @@
     <Content Include="Content\Sig\images\lolo.jpg" />
     <Content Include="Content\Sig\images\overlay.png" />
     <Content Include="Content\Sig\images\slider-4.jpg" />
+    <Content Include="DetailImages\about.jpg" />
+    <Content Include="DetailImages\slider-2.jpg" />
+    <Content Include="DetailImages\slider-3.jpg" />
+    <Content Include="DetailImages\slider-4.jpg" />
+    <Content Include="DetailImages\slider-5.jpg" />
+    <Content Include="DetailImages\slider-6.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -589,22 +742,15 @@
     <Content Include="Content\Admin\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\AdminProperty\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminProperty\Delete.cshtml" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Login\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Login\fonts\FontAwesome.otf" />
     <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Client\Login.cshtml">
-      <BrowseToURL>
-      </BrowseToURL>
-    </Content>
     <Content Include="Areas\Admin\Views\AdminProperty\Edit.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminProperty\Create.cshtml" />
-    <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.eot" />
     <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.ttf" />
     <Content Include="Content\Hata\fonts\fontawesome-webfont93e3.woff" />
@@ -628,6 +774,20 @@
     </Content>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Content\Mate\data\countries.json" />
+    <Content Include="Content\Mate\fonts\dashboard.eot" />
+    <Content Include="Content\Mate\fonts\dashboard.ttf" />
+    <Content Include="Content\Mate\fonts\dashboard.woff" />
+    <Content Include="Content\Mate\icons-reference\fonts\dashboard.eot" />
+    <Content Include="Content\Mate\icons-reference\fonts\dashboard.ttf" />
+    <Content Include="Content\Mate\icons-reference\fonts\dashboard.woff" />
+    <Content Include="Content\Mate\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Mate\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Mate\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Mate\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Mate\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\Mate\vendor\jquery.cookie\component.json" />
+    <Content Include="Content\Mate\vendor\jquery.cookie\cookie.jquery.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -668,13 +828,21 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Client\Login.cshtml" />
+    <Content Include="Views\News\News.cshtml" />
+    <Content Include="Views\News\DetailNews.cshtml" />
+    <Content Include="Views\About\About.cshtml" />
+    <Content Include="Views\Client\ChangePassword.cshtml" />
+    <Content Include="Views\Client\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\Mate\vendor\chart.js\docs\" />
+    <Folder Include="Content\Mate\vendor\font-awesome\less\" />
+    <Folder Include="Content\Mate\vendor\font-awesome\scss\" />
+    <Folder Include="Content\Mate\vendor\jquery.cookie\test\" />
     <Folder Include="MultipleImages\" />
-    <Folder Include="Views\About\" />
-    <Folder Include="Views\News\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

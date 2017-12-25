@@ -95,6 +95,11 @@ namespace PPC_Rental.Controllers
             return View(model);
         }
 
+        public ActionResult Login(string email, string pass)
+        {
+            throw new NotImplementedException();
+        }
+
         //
         // POST: /Account/Disassociate
         [HttpPost]

@@ -17,23 +17,38 @@ namespace PPC_Rental.Areas.Admin.Controllers
         // GET: /Admin/AdminProperty/
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
-
-            
-            var propertymodel = new DAO();
-            var model = propertymodel.ListAllPaging(page, pageSize);
-            return View(model);
-
-
+            if (Session["UserID"] != null)
+            {
+                int x1 = (int)Session["UserID"];
+                var propertymodel = new DAO();
+                var model = propertymodel.ListAllPaging(page, pageSize, x1);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         public JsonResult GetStreet(int did)
         {
             var db = new DemoPPCRentalEntities1();
             var streets = db.STREETs.Where(s => s.DISTRICT.ID == did);
+            var wards = db.WARDs.Where(s => s.DISTRICT.ID == did);
             return Json(streets.Select(s => new
             {
                 id = s.ID,
                 text = s.StreetName
+            }), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetWard(int did)
+        {
+            var db = new DemoPPCRentalEntities1();
+            var wards = db.WARDs.Where(s => s.DISTRICT.ID == did);
+            return Json(wards.Select(s => new
+            {
+                id = s.ID,
+                text = s.WardName
             }), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -41,71 +56,97 @@ namespace PPC_Rental.Areas.Admin.Controllers
         {
             var property = new DAO().ViewDetail(id);
             ListItem();
-
-
             return View(property);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PROPERTY property, List<HttpPostedFileBase> files)
         {
-
-            ListItem();
+            ViewBag.property_type = db.PROPERTY_TYPE.ToList();
+            ViewBag.property_street = db.STREETs.Where(w => w.District_ID == property.District_ID).OrderBy(x => x.StreetName).ToList();
+            ViewBag.property_ward = db.WARDs.Where(w => w.District_ID == property.District_ID).OrderBy(x => x.WardName).ToList();
+            ViewBag.property_district = db.DISTRICTs.OrderBy(x => x.DistrictName).ToList();
+            ViewBag.property_userid = db.USERs.OrderBy(x => x.FullName).ToList();
+            ViewBag.property_status = db.PROJECT_STATUS.OrderBy(x => x.Status_Name).ToList();
             // Images
             try
             {
-
                 string filename = Path.GetFileNameWithoutExtension(property.ImageFile.FileName);
                 string extension = Path.GetExtension(property.ImageFile.FileName);
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
                 property.Avatar =  filename;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
                 // Avatar
-
                 if (Path.GetFileNameWithoutExtension(property.ImageFile.FileName) == null)
                 {
                     string s2 = "~/Images/ImagesNull.png";
                     property.ImageFile.SaveAs(s2);
-                    //property.ImageFile2.SaveAs(filename2);
                 }
                 else
                 {
-                    //property.ImageFile2.SaveAs(filename2);
                     property.ImageFile.SaveAs(filename);
                 }
+                property.Images = ImagesU(property);
                 property.Sale_ID = 1;
-
-
-                // TODO: Add insert logic here
+                var model = new DAO();
                 if (ModelState.IsValid)
                 {
-                    var model = new DAO();
-                    var res = model.Update(property);
-                    if (res)
+                    var id = model.Update(property);
+                    db.PROPERTY_FEATURE.RemoveRange(db.PROPERTY_FEATURE.Where(x=> x.Property_ID == property.ID ));
+                    var Features = Request.Form.AllKeys.Where(k => k.StartsWith("Feature_"));
+                    foreach (var fea in Features)
+                    {
+                        var ids = int.Parse(fea.Split('_')[1]);
+                        if (Request.Form[fea].StartsWith("true"))
+                        {
+                                db.PROPERTY_FEATURE.Add(new PROPERTY_FEATURE
+                                {
+                                    Property_ID = property.ID,
+                                    Feature_ID = ids
+                                });
+                        }
+                    }
+                    db.SaveChanges();
+                    if (id)
                     {
                         return RedirectToAction("Index", "AdminProperty");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Update không thành công");
+                        ModelState.AddModelError("", "Create không thành công");
                     }
                 }
-
             }
-            catch
+            catch(Exception)
             {
+                property.Sale_ID = 1;
+                var model = new DAO();
                 if (ModelState.IsValid)
                 {
-
-                    var model = new DAO();
-                    var res = model.Update(property);
-                    if (res)
+                    var id = model.Update(property);
+                    db.PROPERTY_FEATURE.RemoveRange(db.PROPERTY_FEATURE.Where(x => x.Property_ID == property.ID));
+                    var Features = Request.Form.AllKeys.Where(k => k.StartsWith("Feature_"));
+                    foreach (var fea in Features)
+                    {
+                        var ids = int.Parse(fea.Split('_')[1]);
+                        if (Request.Form[fea].StartsWith("true"))
+                        {
+                                db.PROPERTY_FEATURE.Add(new PROPERTY_FEATURE
+                                {
+                                    Property_ID = property.ID,
+                                    Feature_ID = ids
+                                });
+                           
+                        }
+                    }
+                    db.SaveChanges();
+                    if (id)
                     {
                         return RedirectToAction("Index", "AdminProperty");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Update không thành công");
+                        ModelState.AddModelError("", "Create không thành công");
                     }
                 }
             }
@@ -114,79 +155,6 @@ namespace PPC_Rental.Areas.Admin.Controllers
        
 
         }
-        public ActionResult Create()
-        {
-            ListItem();
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files)
-        {
-            ListItem();
-            try
-            {
-
-                string filename = Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName);
-                string extension = Path.GetExtension(pROPERTY.ImageFile.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                pROPERTY.Avatar =  filename;
-                filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                // Avatar
-
-                if (Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName) == null)
-                {
-                    string s2 = "~/Images/ImagesNull.png";
-                    pROPERTY.ImageFile.SaveAs(s2);
-                    //property.ImageFile2.SaveAs(filename2);
-                }
-                else
-                {
-                    //property.ImageFile2.SaveAs(filename2);
-                    pROPERTY.ImageFile.SaveAs(filename);
-                }
-
-                pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-
-                // TODO: Add insert logic here
-                if (ModelState.IsValid)
-                {
-                    var model = new DAO();
-                    var res = model.InsertProperty(pROPERTY);
-                    if (res > 0)
-                    {
-                        return RedirectToAction("Index", "AdminProperty");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Update không thành công");
-                    }
-                }
-
-            }
-            catch
-            {
-                if (ModelState.IsValid)
-                {
-
-                    var model = new DAO();
-                    var res = model.InsertProperty(pROPERTY);
-                    if (res > 0)
-                    {
-                        return RedirectToAction("Index", "AdminProperty");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Update không thành công");
-                    }
-                }
-            }
-
-
-            
-            return View(pROPERTY);
-        }
-      
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -213,13 +181,6 @@ namespace PPC_Rental.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        public ActionResult Details(int id)
-        {
-            var product = db.PROPERTies.FirstOrDefault(x => x.ID == id);
-            return View(product);
-
-        }
         public void ListItem()
         {
             ViewBag.property_type = db.PROPERTY_TYPE.ToList();
@@ -231,6 +192,30 @@ namespace PPC_Rental.Areas.Admin.Controllers
             
 
         }
+        private string ImagesU(PROPERTY p)
+        {
 
+            string filename;
+            string extension;
+            string b;
+            string s = "";
+            foreach (var file in p.ImageFile1)
+            {
+                if (file.ContentLength > 0)
+                {
+                    filename = Path.GetFileNameWithoutExtension(file.FileName);
+                    extension = Path.GetExtension(file.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                    p.Images = filename;
+                    b = p.Images;
+                    s = string.Concat(s, b, ",");
+                    filename = Path.Combine(Server.MapPath("~/MultipleImages"), filename);
+                    file.SaveAs(filename);
+                }
+            }
+          
+            return s;
+
+        }
     }
 }

@@ -1,269 +1,183 @@
 ﻿@model PPC_Rental.Models.PROPERTY
 @using PPC_Rental.Models;
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     var db = new DemoPPCRentalEntities1();
-    var Quans = new SelectList(db.DISTRICTs, "ID", "DistrictName");
-    var Duongs = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
-
-
-
 }
-
-<h2>Create</h2>
-
-
 @using (Html.BeginForm("Create", "Client", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <section class="forms">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Basic Form-->
+                <!-- Form Elements -->
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-close">
+                            <div class="dropdown">
+                                <button type="button" id="closeCard5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                <div aria-labelledby="closeCard5" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                            </div>
+                        </div>
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">Post Form</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Property Name</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.PropertyName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PropertyName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Avatar</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="ImageFile">
+                                        @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                                        @*<span class="help-block-none">A block of help text that breaks onto a new line and may extend beyond one line.</span>*@
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Images</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="files" multiple="">
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Property Type</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type, "ID", "CodeType"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PropertyType_ID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Description</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextAreaFor(model => model.Content, new { @class = "form-control", style = "height:100px" })
+                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">District</label>
+                                    <div class="col-sm-9">
 
-
-    <div class="form-horizontal">
-        <h4>PROPERTY</h4>
-        <hr />
-
-
-
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Property Name</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.PropertyName, new { style = "width:500px" })
-                    @Html.ValidationMessageFor(model => model.PropertyName)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.LabelFor(model => model.Avatar) </label>
-
-                <div class="col-sm-9">
-
-                    <input type="file" name="ImageFile">
-                    @*@Html.TextBoxFor(model => model.Avatar, new { style = "width:250px" })
-                        @Html.ValidationMessageFor(model => model.Avatar)*@
-
-                </div>
-            </div>
-
-            @*multiple*@
-            @*<div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.LabelFor(model => model.Images) </label>
-
-                    <div class="col-sm-9">
-                        <input multiple type="file" name="files" value="Browse" />
-
+                                        @Html.DropDownList("District_ID", new SelectList(ViewBag.property_district, "ID", "DistrictName"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.District_ID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Ward</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("Ward_ID", new SelectList(ViewBag.property_ward, "ID", "WardName"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Ward_ID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Street</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("Street_ID", new SelectList(ViewBag.property_street, "ID", "StreetName"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Street_ID, "", new { @class = "text-danger" })
+                                </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Price (USD)</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @type = "number" })
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Area (Square)</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Area, new { @class = "form-control", @type = "number" })
+                                        @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Bedrooms</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.BedRoom, new { @class = "form-control", @type = "number" })
+                                        @Html.ValidationMessageFor(model => model.BedRoom, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Bathrooms</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.BathRoom, new { @class = "form-control", @type = "number" })
+                                        @Html.ValidationMessageFor(model => model.BathRoom, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Parking Place</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.PackingPlace, new { @class = "form-control", @type = "number" })
+                                        @Html.ValidationMessageFor(model => model.PackingPlace, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Note</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.Note, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">Feature</label>
+                                    <div class="col-sm-9">
+                                        @foreach (var f in db.FEATUREs)
+                                        {
+                                            @Html.CheckBox("Feature_" + f.ID, false) <span>@f.FeatureName</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4 offset-sm-3">
+                                        <button type="submit" class="btn btn-primary">Post</button>
+                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>*@
-
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Property Type</label>
-
-                <div class="col-sm-9">
-
-                    @Html.DropDownList("PropertyType_ID", new SelectList(ViewBag.property_type, "ID", "CodeType"), new { @class = "chosen-select form-control", style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.PropertyType_ID, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> @Html.LabelFor(model => model.Content) </label>
-
-                <div class="col-sm-9">
-                    @Html.TextAreaFor(model => model.Content, new { style = "width:500px; height:100px" })
-                    @Html.ValidationMessageFor(model => model.Content)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">District</label>
-
-                <div class="col-sm-9">
-
-                    @Html.DropDownList("District_ID", new SelectList(ViewBag.property_district, "ID", "DistrictName"), new { @class = "chosen-select form-control", style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.District_ID)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Ward</label>
-
-                <div class="col-sm-9">
-                    @Html.DropDownList("Ward_ID", new SelectList(ViewBag.property_ward, "ID", "WardName"), new { @class = "chosen-select form-control", style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Ward_ID)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Street</label>
-
-                <div class="col-sm-9">
-                    @Html.DropDownList("Street_ID", new SelectList(ViewBag.property_street, "ID", "StreetName"), new { @class = "chosen-select form-control", style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Street_ID)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Price</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.Price, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Price)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Unit Price</label>
-
-                <div class="col-sm-9">
-                    <div class="space-4"></div>
-                    @Html.Label("USD")
-                    @Html.ValidationMessageFor(model => model.UnitPrice)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Area</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.Area, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Area)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Bedrooms</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.BedRoom, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.BedRoom)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Bathrooms</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.BathRoom, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.BathRoom)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Parking Place</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.PackingPlace, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.PackingPlace)
-
-                </div>
-            </div>
-            <div class="space-4"></div>
-            @*<div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Email</label>
-
-                <div class="col-sm-9">
-                    @Html.DropDownList("UserID", new SelectList(ViewBag.property_userid, "ID", "Email"), new { @class = "chosen-select form-control", style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.USER)
-
-                </div>
-            </div>
-            <div class="space-4"></div>*@
-            @*<div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Created At</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.Created_at, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Created_at)
-
-                </div>
-            </div>*@
-            @*<div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Create Post</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.Create_post, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Create_post)
-
-                </div>
-            </div>
-            <div class="space-4"></div>*@
-            @*<div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Status</label>
-
-                <div class="col-sm-9">
-                    @Html.DropDownList("Status_ID", new SelectList(ViewBag.property_status, "ID", "Status_Name"), new { @class = "chosen-select form-control", style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.PROJECT_STATUS)
-
-                </div>
-            </div>
-            <div class="space-4"></div>*@
-            
-            @*<div class="space-4"></div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Update At</label>
-
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(model => model.Updated_at, new { style = "width:250px" })
-                    @Html.ValidationMessageFor(model => model.Updated_at)
-
-                </div>
-            </div>*@
-
-
-            <div class="space-4"></div>
-
-
-            <div class="clearfix form-actions">
-                <div class="col-md-offset-3 col-md-9">
-                    <button class="btn btn-info" type="submit" value="create">
-                        <i class="ace-icon fa fa-check bigger-110"></i>
-                        Submit
-                    </button>
-
-                    &nbsp; &nbsp; &nbsp;
-                    <button class="btn" type="reset">
-                        <i class="ace-icon fa fa-undo bigger-110"></i>
-                        Reset
-                    </button>
-                </div>
-            </div>
-
-            <div class="hr hr-24"></div>
-        </form>
-
-    </div>
+        </div>
+    </section>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 @section Scripts {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
-        $('#Ditrict_ID').select2();
-        $('#Street_ID').select2();
+        //$('#Ditrict_ID').select2();
+        //$('#Street_ID').select2();
         $('#District_ID').on('change', function () {
             $('#Street_ID').empty();
+            $('#Ward_ID').empty();
             $.getJSON('/Admin/AdminProperty/GetStreet?did=' + $('#District_ID').val(), function (json) {
                 $('#Street_ID').select2({ data: json });
             });
-
+            $.getJSON('/Admin/AdminProperty/GetWard?did=' + $('#District_ID').val(), function (json) {
+                $('#Ward_ID').select2({ data: json });
+            });
         });
     </script>
 }

@@ -20,6 +20,8 @@ namespace PPC_Rental.Models
         public string ShortDescription { get; set; }
         public string Content { get; set; }
         public Nullable<int> User_ID { get; set; }
+        public string DetailImages { get; set; }
+        public Nullable<System.DateTime> Create_at { get; set; }
     
         public virtual USER USER { get; set; }
     }

@@ -1,104 +1,123 @@
 ﻿@model PPC_Rental.Models.RegisterModel
-
+@using BotDetect.Web.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+@{ MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha"); }
 @{
     Layout = null;
 }
-
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Frequent Sign In Form A Responsive Widget Template :: w3layouts</title>
-    <!-- Meta tag Keywords -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sign Up</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Frequent Sign In Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
-    <script type="application/x-javascript">
-         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-        function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Meta tag Keywords -->
-    <!-- css files -->
-    <link rel="stylesheet" href="/Content/Sig/css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
-    <link rel="stylesheet" href="/Content/Sig/css/style.css" type="text/css" media="all" /> <!-- Style-CSS -->
-    <!-- //css files -->
-    <!-- web-fonts -->
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
-    <!-- //web-fonts -->
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/Content/Mate/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/Content/Mate/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="/Content/Mate/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="~/Content/Mate/css/style.red.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/Content/Mate/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="/Content/Mate/img/favicon.ico">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
 @using (Html.BeginForm("Register", "Client", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
-    <div class="banner-overlay-agileinfo">
-        <!--header-->
-        <div class="header-w3l">
-            <h1>HATA COMPANY</h1>
-        </div>
-        <!--//header-->
-        <!--main-->
-        <div class="main-w3layouts-agileinfo">
-            <!--form-stars-here-->
-            <div class="wthree-form">
-                <h2>Register here</h2>
-                @Html.ValidationSummary(true)
-                @if (ViewBag.Success != null)
-                {
-                   
-                    <div class="alert alert-success">@ViewBag.Success</div>
-                }
-                    <div class="form-sub-w3">
-                        @Html.TextBoxFor(model => model.Email, new { @class = "password", @placeholder = "Your Email" })
-                        @Html.ValidationMessageFor(model => model.Email)
-                        <div class="icon-w3">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+    <div class="page login-page">
+        <div class="container d-flex align-items-center">
+            <div class="form-holder has-shadow">
+                <div class="row">
+                    <!-- Logo & Information Panel-->
+                    <div class="col-lg-6">
+                        <div class="info d-flex align-items-center">
+                            <div class="content">
+                                <div class="logo">
+                                    <h1>PPC Rental</h1>
+                                </div>
+                                <p>Don't wait to buy real estate, buy real estate and wait.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-sub-w3">
-                        @Html.PasswordFor(model => model.Password, new { @class = "password", @placeholder = "Password" })
-                        @Html.ValidationMessageFor(model => model.Password)
-                        
+                    <!-- Form Panel    -->
+                    <div class="col-lg-6 bg-white">
+                        <div class="form d-flex align-items-center">
+                            <div class="content">
+                                <form id="register-form">
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true,"", new { @class="text-danger"})
+                                        @if (ViewBag.Success != null)
+                                        {
+                                            <div class="text-danger">@ViewBag.Success</div>
+                                        }
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "input-material", @required="", @id="username", @placeholder="Email"})
+                                        @Html.ValidationMessageFor(model => model.Email,"", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(model => model.Password, new { @class = "input-material", @required = "", @id = "password", @type = "password", @placeholder = "Password"})
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "input-material", @id = "tpassword", @type = "password", @placeholder = "Confirm Password" })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.FullName, new { @class = "input-material", @id = "fullname", @type = "text", @placeholder = "Full Name" })
+                                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Phone, new { @class = "input-material", @id = "Phone", @type = "text", @placeholder = "Phone Number" })
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Address, new { @class = "input-material", @id = "add", @type = "text", @placeholder = "Address" })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Captcha(registerCapcha)
+                                        <p></p>
+                                        @Html.TextBox("CaptchaCode","", new { @class = "input-material" ,@id="cap", @placeholder = "Capcha" })
+                                    </div>
+                                    <input id="register" type="submit" value="Register" class="btn btn-primary">
+                                </form>
+                                <div>
+                                    <small>Already have an account? </small><a href="~/Client/Login" class="signup">Login</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-sub-w3">
-                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "password", @placeholder = "Confirm Password" })
-                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                       
-                    </div>
-                    <div class="form-sub-w3">
-                        @Html.TextBoxFor(model => model.FullName, new { @class = "password", @placeholder = "Full Name" })
-                        @Html.ValidationMessageFor(model => model.FullName)
-                       
-                    </div>
-                    <div class="form-sub-w3">
-                        @Html.TextBoxFor(model => model.Phone, new { @class = "password", @placeholder = "Phone Number" })
-                        @Html.ValidationMessageFor(model => model.Phone)
-                        
-                    </div>
-                    <div class="form-sub-w3">
-                        @Html.TextBoxFor(model => model.Address, new { @class = "password", @placeholder = "Address" })
-                        @Html.ValidationMessageFor(model => model.Address)
-                        
-                    </div>
-                    <p class="forgot-w3ls">Forgot Password?<a href="#">  Click here</a></p>
-                    <p class="forgot-w3ls1">You are Agency?<a href="~/Admin/Client/Login">  Sign In</a></p>
-                    <div class="clear"></div>
-                    <div class="submit-agileits">
-                        <input type="submit" value="Sign in">
-                    </div>
-              
-
+                </div>
             </div>
-            <!--//form-ends-here-->
-
         </div>
-        <!--//main-->
-        <!--footer-->
-        <!--//footer-->
+        <div class="copyrights text-center">
+            <p>Design by <a href="https://bootstrapious.com" class="external">Rean</a></p>
+            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+        </div>
     </div>
+    <!-- Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/Content/Mate/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="/Content/Mate/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Content/Mate/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/Content/Mate/vendor/chart.js/Chart.min.js"></script>
+    <script src="/Content/Mate/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
 }
 </body>
 </html>

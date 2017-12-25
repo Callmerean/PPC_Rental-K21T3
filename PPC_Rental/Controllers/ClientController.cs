@@ -7,6 +7,9 @@ using PPC_Rental.Models;
 using System.IO;
 using System.Data.Entity;
 using System.Net;
+using PPC_Rental.Models.Common;
+using BotDetect.Web.Mvc;
+using System.Web.Helpers;
 
 namespace PPC_Rental.Areas.Admin.Controllers
 {
@@ -14,16 +17,36 @@ namespace PPC_Rental.Areas.Admin.Controllers
     {
         // GET: Admin/Client
         DemoPPCRentalEntities1 db = new DemoPPCRentalEntities1();
-      
+       
+
+        public JsonResult GetStreet(int did)
+        {
+            var db = new DemoPPCRentalEntities1();
+            var streets = db.STREETs.Where(s => s.DISTRICT.ID == did);
+            return Json(streets.Select(s => new
+            {
+                id = s.ID,
+                text = s.StreetName
+            }), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetWard(int did)
+        {
+            var db = new DemoPPCRentalEntities1();
+            var wards = db.WARDs.Where(s => s.DISTRICT.ID == did);
+            return Json(wards.Select(s => new
+            {
+                id = s.ID,
+                text = s.WardName
+            }), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
             if (Session["UserID"] != null)
             {
                 int x1 = (int)Session["UserID"];
-                var property = db.PROPERTies.Where(x => x.UserID == x1);
-
-
-                return View(property);
+                var propertymodel = new DAO();
+                var model = propertymodel.UserListAllPaging(page, pageSize, x1);
+                return View(model);
             }
             else
             {
@@ -43,28 +66,30 @@ namespace PPC_Rental.Areas.Admin.Controllers
             {
                 if (user.Password.Equals(password))
                 {
-                    if(user.Status==true && int.Parse(user.Role)==0){
-                        Session["FullName"] = user.FullName;
-                        Session["Role"] = user.Role;
-
-                        Session["UserID"] = user.ID;
-
-                        return RedirectToAction("Index","Admin/AdminProperty");
-                    }
-                    else if (user.Status == true && int.Parse(user.Role) == 1)
-                    
+                    if (user.Status == true && int.Parse(user.Role) == 0)
                     {
                         Session["FullName"] = user.FullName;
                         Session["Role"] = user.Role;
+                        Session["Email"] = user.Email;
+                        Session["UserID"] = user.ID;
+
+                        return RedirectToAction("Index", "Admin/AdminProperty");
+                    }
+                    else if (user.Status == true && int.Parse(user.Role) == 1)
+                    {
+                        Session["FullName"] = user.FullName;
+                        Session["Role"] = user.Role;
+                        Session["Email"] = user.Email;
                         Session["UserID"] = user.ID;
                         return RedirectToAction("Index", "Client");
                     }
                 }
+                else
+                {
+                    ViewBag.mgs = "Tài khoảng hoặc mật khẩu không đúng";
+                }
             }
-            else
-            {
-                ViewBag.mgs = "tai khoang khong ton tai";
-            }
+           
             return View();
         }
         public ActionResult Logout(int id)
@@ -77,7 +102,7 @@ namespace PPC_Rental.Areas.Admin.Controllers
                 Session["Role"] = null;
 
             }
-            return RedirectToAction("/");
+            return RedirectToAction("Index","Home");
         }
 
 
@@ -92,176 +117,165 @@ namespace PPC_Rental.Areas.Admin.Controllers
         public ActionResult Create(PROPERTY pROPERTY, List<HttpPostedFileBase> files)
         {
             ListItem();
+            
+            var proAddMulti = "";
             try
             {
-
+                //Avatar
                 string filename = Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName);
                 string extension = Path.GetExtension(pROPERTY.ImageFile.FileName);
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
                 pROPERTY.Avatar =  filename;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                // Avatar
-
                 if (Path.GetFileNameWithoutExtension(pROPERTY.ImageFile.FileName) == null)
                 {
                     string s2 = "~/Images/ImagesNull.png";
                     pROPERTY.ImageFile.SaveAs(s2);
-                    
                 }
                 else
                 {
-                   
                     pROPERTY.ImageFile.SaveAs(filename);
                 }
-
+                
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                String.Format("{0:M/d/yyyy}", pROPERTY.Created_at);
                 pROPERTY.UserID = (int)Session["UserID"];
-                pROPERTY.Status_ID = 3;
+                pROPERTY.Status_ID = 1;
                 pROPERTY.Sale_ID = 1;
-             
+                pROPERTY.UnitPrice = "USD";
+                var model = new DAO();
+                if (ModelState.IsValid)
+                { 
+                    long id = model.InsertProperty(pROPERTY);
+                    var Features = Request.Form.AllKeys.Where(k => k.StartsWith("Feature_"));
+                    foreach (var fea in Features)
+                    {
+                        var ids = int.Parse(fea.Split('_')[1]);
+                        if (Request.Form[fea].StartsWith("true"))
+                        {
+                            db.PROPERTY_FEATURE.Add(new PROPERTY_FEATURE
+                            {
+                                Property_ID = (int)id,
+                                Feature_ID = ids
+                            });
+                        }
+                    }
+                    var path = "";
+                    foreach (var item in files)
+                    {
+                        if (item != null)
+                        {
+                            if (item.ContentLength > 0)
+                            {
+                                if (Path.GetExtension(item.FileName).ToLower() == ".jpg"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".png"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".gif"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".jpeg")
+                                {
+                                    var path0 = id + item.FileName;
+                                    path = Path.Combine(Server.MapPath("~/MultipleImages"), path0);
+                                    if (proAddMulti == "")
+                                    {
+                                        proAddMulti = path0;
+                                    }
+                                    else
+                                    {
+                                        proAddMulti = proAddMulti + "," + path0;
+                                    }
+                                    item.SaveAs(path);
+                                    ViewBag.UploadSuccess = true;
+
+                                }
+                            }
+                        }
+                    }
+                    var proMultiImage = db.PROPERTies.FirstOrDefault(x => x.ID == id);
+                    proMultiImage.Images = proAddMulti;
+                    db.SaveChanges();
+                    if (id > 0)
+                    {
+                        return RedirectToAction("Index", "Client");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Create không thành công");
+                    }
+                }
                
-                if (ModelState.IsValid)
-                {
-                    var model = new DAO();
-                    var res = model.InsertProperty(pROPERTY);
-                    if (res > 0)
-                    {
-                        return RedirectToAction("Index", "Client");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Update không thành công");
-                    }
-                }
-
             }
-            catch
+            catch(NullReferenceException)
             {
+               
                 pROPERTY.Created_at = DateTime.Parse(DateTime.Now.ToShortDateString());
+                String.Format("{0:M/d/yyyy}", pROPERTY.Created_at);
                 pROPERTY.UserID = (int)Session["UserID"];
-                pROPERTY.Status_ID = 3;
-             
+                pROPERTY.Status_ID = 1;
+                pROPERTY.Sale_ID = 1;
+                pROPERTY.UnitPrice = "USD";
+                var model = new DAO();
                 if (ModelState.IsValid)
                 {
+                    long id = model.InsertProperty(pROPERTY);
+                    var Features = Request.Form.AllKeys.Where(k => k.StartsWith("Feature_"));
+                    foreach (var fea in Features)
+                    {
+                        var ids = int.Parse(fea.Split('_')[1]);
+                        if (Request.Form[fea].StartsWith("true"))
+                        {
+                            db.PROPERTY_FEATURE.Add(new PROPERTY_FEATURE
+                            {
+                                Property_ID = (int)id,
+                                Feature_ID = ids
+                            });
+                        }
+                    }
+                    var path = "";
+                    foreach (var item in files)
+                    {
+                        if (item != null)
+                        {
+                            if (item.ContentLength > 0)
+                            {
+                                if (Path.GetExtension(item.FileName).ToLower() == ".jpg"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".png"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".gif"
+                                    || Path.GetExtension(item.FileName).ToLower() == ".jpeg")
+                                {
+                                    var path0 = id + item.FileName;
+                                    path = Path.Combine(Server.MapPath("~/MultipleImages"), path0);
+                                    if (proAddMulti == "")
+                                    {
+                                        proAddMulti = path0;
+                                    }
+                                    else
+                                    {
+                                        proAddMulti = proAddMulti + "," + path0;
+                                    }
+                                    item.SaveAs(path);
+                                    ViewBag.UploadSuccess = true;
 
-                    var model = new DAO();
-                    var res = model.InsertProperty(pROPERTY);
-                    if (res > 0)
+                                }
+                            }
+                        }
+                    }
+                    var proMultiImage = db.PROPERTies.FirstOrDefault(x => x.ID == id);
+                    proMultiImage.Images = proAddMulti;
+                    db.SaveChanges();
+                    if (id > 0)
                     {
                         return RedirectToAction("Index", "Client");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Update không thành công");
+                        ModelState.AddModelError("", "Create không thành công");
                     }
                 }
 
             }
 
-            db.SaveChanges();
-
-            return View(pROPERTY);
-        }
-        [HttpGet]
-        public ActionResult Edit(int id)
-        {
-            var property = new DAO().ViewDetail(id);
-            ListItem();
-
-
-            return View(property);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(PROPERTY property, List<HttpPostedFileBase> files)
-        {
-
-            ListItem();
-            try
-            {
-
-                string filename = Path.GetFileNameWithoutExtension(property.ImageFile.FileName);
-                string extension = Path.GetExtension(property.ImageFile.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                property.Avatar = filename;
-                filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                // Avatar
-
-                if (Path.GetFileNameWithoutExtension(property.ImageFile.FileName) == null)
-                {
-                    string s2 = "ImagesNull.png";
-                    property.ImageFile.SaveAs(s2);
-                    //property.ImageFile2.SaveAs(filename2);
-                }
-                else
-                {
-                    //property.ImageFile2.SaveAs(filename2);
-                    property.ImageFile.SaveAs(filename);
-                }
-                property.Updated_at = DateTime.Parse(DateTime.Now.ToShortDateString());
-                property.UserID = (int)Session["UserID"];
-                property.Status_ID = 1;
-                property.Sale_ID = 1;
-
-                // TODO: Add insert logic here
-                if (ModelState.IsValid)
-                {
-                    var model = new DAO();
-                    var res = model.Update(property);
-                    if (res)
-                    {
-                        return RedirectToAction("Index", "Client");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Update không thành công");
-                    }
-                }
-
-            }
-            catch
-            {
-                if (ModelState.IsValid)
-                {
-
-                    var model = new DAO();
-                    var res = model.Update(property);
-                    if (res)
-                    {
-                        return RedirectToAction("Index", "Client");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Update không thành công");
-                    }
-                }
-            }
-            return View(property);
-        }
            
-            public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PROPERTY pROPERTY = db.PROPERTies.Find(id);
-            if (pROPERTY == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pROPERTY);
-        }
 
-        // POST: Admin/xx/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PROPERTY pROPERTY = db.PROPERTies.Find(id);
-            db.PROPERTies.Remove(pROPERTY);
-            db.SaveChanges();
-            return RedirectToAction("Index","Client");
+            return View(pROPERTY);
         }
         [HttpGet]
         public ActionResult Details(int id)
@@ -270,13 +284,13 @@ namespace PPC_Rental.Areas.Admin.Controllers
             return View(product);
 
         }
-
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
         [HttpPost]
+        [CaptchaValidation("CaptchaCode", "registerCapcha", "Mã xác nhận không đúng!")]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -296,7 +310,6 @@ namespace PPC_Rental.Areas.Admin.Controllers
                     user.Address = model.Address;
                     user.Role = "1";
                     user.Status = true;
-                   
                     var result = dao.Insert(user);
                     if (result > 0)
                     {
@@ -311,7 +324,54 @@ namespace PPC_Rental.Areas.Admin.Controllers
             }
             return View(model);
         }
+        public ActionResult ChangePassword()
+        {
+            int id = int.Parse(Session["UserID"].ToString());
+            var userdetail = db.USERs.Where(x => x.ID == id);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldPass, string newPass, string comPass)
+        {
+            int id = int.Parse(Session["UserID"].ToString());
+            var userdetail = db.USERs.Find(id);
+            if (userdetail.ID == id)
+            {
+                if (userdetail.Password == oldPass)
+                {
+                    if (newPass == comPass)
+                    {
+                        userdetail.Password = newPass;
+                        db.SaveChanges();
+                        ViewBag.mess = "success";
+                        if (Session["Role"].Equals(1)) {
+                            return RedirectToAction("Index", "Client", new { userid = int.Parse(Session["UserID"].ToString()) });
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Admin/AdminProperty");
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.mess = "Mật khẩu xác nhận không đúng";
+                        return View();
+                    }
 
+                }
+                else
+                {
+                    ViewBag.mess = "Sai mật khẩu";
+                    return View();
+                }
+
+            }
+            else
+            {
+
+                return View();
+            }
+        }
 
         public void ListItem()
         {
@@ -321,11 +381,36 @@ namespace PPC_Rental.Areas.Admin.Controllers
             ViewBag.property_district = db.DISTRICTs.OrderBy(x => x.DistrictName).ToList();
             ViewBag.property_userid = db.USERs.OrderBy(x => x.FullName).ToList();
             ViewBag.property_status = db.PROJECT_STATUS.OrderBy(x => x.Status_Name).ToList();
-            //ViewBag.sale = model.Sla.ToList();
+            ViewBag.Feature_ID = db.FEATUREs.ToList();
 
         }
 
+        private string ImagesU(PROPERTY p)
+        {
 
+            string filename;
+            string extension;
+            string b;
+            string s = "";
+            foreach (var file in p.ImageFile1)
+            {
+                if (file.ContentLength > 0)
+                {
+                    filename = Path.GetFileNameWithoutExtension(file.FileName);
+                    extension = Path.GetExtension(file.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                    p.Images = filename;
+                    b = p.Images;
+                    s = string.Concat(s, b, ",");
+                    filename = Path.Combine(Server.MapPath("~/MultipleImages"), filename);
+                    file.SaveAs(filename);
+
+                }
+
+            }
+            return s;
+
+        }
 
     }
 }

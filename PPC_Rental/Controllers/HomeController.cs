@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PPC_Rental.Models;
-
+using System.IO;
 
 namespace PPC_Rental.Controllers
 {
@@ -18,7 +18,7 @@ namespace PPC_Rental.Controllers
 
         public ActionResult Index()
         {
-            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID);
+            var property = model.PROPERTies.ToList().OrderByDescending(x => x.ID).Where(x => x.Status_ID == 3);
 
             myDis = new List<SelectListItem>();
             myType = new List<SelectListItem>();
@@ -99,17 +99,16 @@ namespace PPC_Rental.Controllers
             {
                 property = property.Where(p => p.Price >= min && p.Price <= max).ToList();
             }
-            
-
             return PartialView(property);
-
-
-
         }
         
         public ActionResult Details(int id)
         {
-            var property = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            var property = model.PROPERTies.Find(id);
+            ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/MultipleImages")).Select(fn => "~/MultipleImages"+Path.GetFileName(fn));
+            ViewBag.features = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).ToList();
+            ViewBag.Count = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).Count();
+            ViewBag.fea = model.FEATUREs.ToList();
             return View(property);
         }
 

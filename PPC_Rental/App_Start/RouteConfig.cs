@@ -13,6 +13,10 @@ namespace PPC_Rental
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // BotDetect requests must not be routed
+            routes.IgnoreRoute("{*botdetect}",
+              new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
@@ -25,6 +29,12 @@ namespace PPC_Rental
           defaults: new { controller = "Client", action = "Register", id = UrlParameter.Optional },
           namespaces: new[] { "PPC_Rental.Controllers" }
       );
+            routes.MapRoute(
+         name: "Login",
+         url: "dang-nhap",
+         defaults: new { controller = "Client", action = "Login", id = UrlParameter.Optional },
+         namespaces: new[] { "PPC_Rental.Controllers" }
+     );
         }
     }
 }

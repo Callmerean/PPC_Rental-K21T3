@@ -1,106 +1,92 @@
-﻿@model IEnumerable<PPC_Rental.Models.PROPERTY>
+﻿@model PagedList.IPagedList<PPC_Rental.Models.PROPERTY>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>Agency Area</h2>
-
+<h2></h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
 </p>
-
-<div class="col-xs-12">
-    <!-- PAGE CONTENT BEGINS -->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12">
-            <table id="simple-table" class="table  table-bordered table-hover">
-                <thead>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-close">
+                    <div class="dropdown">
+                        <button type="button" id="closeCard2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard2" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                    </div>
+                </div>
+                <div class="card-header d-flex align-items-center">
+                    <h3 class="h4">@Html.ActionLink("Create New Property", "Create")</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Property Name</th>
+                                <th>Avatar</th>
+                                <th>Property Type</th>
+                                <th>Price</th>
+                                <th>Area</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PropertyName)
+                                    </td>
+                                    <td>
+                                        @{
+                                            try
+                                            {
+                                                <img src="~/Images/@item.Avatar" width="150px">
+                                            }
+                                            catch (Exception ex)
+                                            {
 
-
-                <th>PropertyName</th>
-                <th>Avatar</th>
-                <th>PropertyType</th>
-                <th>Price</th>
-                <th>UnitPrice</th>
-                <th>Area</th>
-                <th>District</th>
-                <th>Status</th>
-                
-                <th>Created</th>
-               
-                <th></th>
-
-
-                </thead>
-
-                <tbody>
-                    @foreach (var item in Model )
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PropertyName)
-                            </td>
-                            <td>
-                                @{
-
-                                    try
-                                    {
-                                           
-                                        <img src="~/Images/@item.Avatar" width="150px">
-                                      
-
-                                    }
-                                    catch (Exception ex)
-                                    {
-
-                                    }
-                                }
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PROPERTY_TYPE.CodeType)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Price)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnitPrice)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Area)
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DISTRICT.DistrictName)
-                            </td>
-
-                            <td class="hidden-480">
-                                <span class="label label-sm label-warning">@Html.DisplayFor(modelItem => item.PROJECT_STATUS.Status_Name)</span>
-
-                            </td>
-
-
-                            
-
-                            <th>
-                                @Html.DisplayFor(modelItem => item.Created_at)
-                            </th>
-                           
-                            <td>
-                               @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                                    }
-
-
-
-
-                </tbody>
-            </table>
-            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
-        </div><!-- /.span -->
-    </div><!-- /.row -->
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PROPERTY_TYPE.CodeType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Area)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DISTRICT.DistrictName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PROJECT_STATUS.Status_Name)
+                                    </td>
+                                    <th>
+                                        @Html.DisplayFor(modelItem => item.Created_at)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayFor(modelItem => item.Updated_at)
+                                    </th>
+                                    <td>
+                                       
+                                    </td>
+                                </tr>
+                                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- PAGE CONTENT ENDS -->
+</div>
+
