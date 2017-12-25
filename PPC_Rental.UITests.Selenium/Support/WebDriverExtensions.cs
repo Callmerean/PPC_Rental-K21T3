@@ -79,20 +79,21 @@ namespace PPC_Rental.UITests.Selenium.Support
 
         public static void NavigateTo(this IWebDriver browser, string relativeUrl)
         {
-            browser.Navigate().GoToUrl(new Uri(new Uri(ConfigurationManager.AppSettings["http://localhost:4675/"]), relativeUrl));
-        }
+            browser.Navigate().GoToUrl(new Uri(new Uri(ConfigurationManager.AppSettings["BaseUrl"]), relativeUrl));
+            //browser.Navigate().GoToUrl("http://localhost:4675/");
 
-        public static DropDown GetDropDown(this IWebDriver browser, string id)
-        {
-            return browser.FindElement(By.Id(id)).AsDropDown();
         }
+            public static DropDown GetDropDown(this IWebDriver browser, string id)
+            {
+                return browser.FindElement(By.Id(id)).AsDropDown();
+            }
 
-        public static DropDown AsDropDown(this IWebElement e)
-        {
-            return new DropDown(e);
-        }
+            public static DropDown AsDropDown(this IWebElement e)
+            {
+                return new DropDown(e);
+            }
 
-        public class DropDown
+            public class DropDown
         {
             private readonly IWebElement _dropDown;
 
@@ -119,5 +120,6 @@ namespace PPC_Rental.UITests.Selenium.Support
                 }
             }
         }
+
     }
 }

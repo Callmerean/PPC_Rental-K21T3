@@ -10,7 +10,7 @@ using PPC_Rental.AcceptanceTests;
 using PPC_Rental.AcceptanceTests.Drivers;
 using FluentAssertions;
 using PPC_Rental.AcceptanceTests.Drivers.Search;
-
+using PPC_Rental.Areas.Admin.Controllers;
 
 namespace PPC_Rental.AcceptanceTests.Drivers
 {
@@ -60,9 +60,9 @@ namespace PPC_Rental.AcceptanceTests.Drivers
 
         public void Login(string email, string pass)
         {
-            using (var controller = new AccountController())
+            using (var controller = new ClientController())
             {
-                _context.ActionResult = controller.Login(email,pass);
+                _context.ActionResult = controller.Login(email, pass);
             }
         }
 

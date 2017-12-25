@@ -105,7 +105,7 @@ namespace PPC_Rental.Controllers
         public ActionResult Details(int id)
         {
             var property = model.PROPERTies.Find(id);
-            ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/MultipleImages")).Select(fn => "~/MultipleImages"+Path.GetFileName(fn));
+            //ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/MultipleImages")).Select(fn => "~/MultipleImages"+Path.GetFileName(fn));
             ViewBag.features = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).ToList();
             ViewBag.Count = model.PROPERTY_FEATURE.Where(x => x.Property_ID == id).Count();
             ViewBag.fea = model.FEATUREs.ToList();
