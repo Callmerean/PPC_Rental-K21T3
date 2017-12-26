@@ -119,6 +119,9 @@
     <Compile Include="Support\SeleniumController.cs" />
     <Compile Include="Support\SeleniumStepsBase.cs" />
     <Compile Include="Support\WebDriverExtensions.cs" />
+    <Compile Include="UC01_FilterProjectStep.cs" />
+    <Compile Include="UC02_ViewListOfProjectStep.cs" />
+    <Compile Include="UC05_ViewListOfAgencyProjectStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
